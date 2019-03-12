@@ -287,6 +287,10 @@ a:hover{
     z-index: 5;
   }
 
+  .video{
+    height:250px;
+  }
+
   .nav-item{
     float:left;
   }
