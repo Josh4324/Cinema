@@ -106,6 +106,7 @@ a:hover{
 
 .contain{
   padding-top:1rem!important;
+  margin-bottom:50px;
 }
 
 .person{
@@ -337,6 +338,14 @@ a:hover{
 @media (max-width:320px){
   .nav-link{
     padding: 1rem 1.17rem!important;
+  }
+
+  .social-icon{
+    margin-left:20px;
+  }
+
+  .desc{
+    font-size:12px!important;
   }
 }
 
