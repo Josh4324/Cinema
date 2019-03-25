@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { ProductConsumer } from '../Context';
-
-class Cinema extends Component {
-    
+import {ProductConsumer} from '../Context';
+class CinemaReview extends Component {
     render() {
-        const {film_title, cinema_name, showing, video,views,comments} = this.props.data;
+        const {name,video,views,comments} = this.props.data;
         return (
             <div className="card card1 ">
                 <ProductConsumer>
@@ -12,14 +10,9 @@ class Cinema extends Component {
                     <div>
                         <div className="card-header1">
                             <div className="person"><i className="fas fa-user icon-person"></i></div>
-                            <div className="desc">
-                                <p>{cinema_name}</p>
-                                <p>{film_title}</p>
-                                <p>{showing}</p>
-                            </div>
                         </div>
                         <div >
-                            <iframe className="video" autoPlay loop muted id="video" title={film_title} src={video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <iframe className="video" autoPlay loop muted id="video" title={name} src={video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                             <button className="button">Buy Ticket</button>
                         </div>
                         <div className="socialbuttons mx-auto">
@@ -46,4 +39,4 @@ class Cinema extends Component {
     }
 }
 
-export default Cinema;
+export default CinemaReview;

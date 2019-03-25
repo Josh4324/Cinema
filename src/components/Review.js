@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {ProductConsumer} from '../Context';
-import Cinema from './Cinema';
+import CinemaReview from './CinemaReview';
 
-
-class CinemaList extends Component {
+class Review extends Component {
     render() {
         return (
             <div className="contain py-3">
@@ -12,7 +11,7 @@ class CinemaList extends Component {
                             <ProductConsumer>
                                 {(value) => {
                                     return value.data.map(data => {
-                                        return <Cinema key={value.id} data={data}/>
+                                        return <CinemaReview key={value.id} data={data}/>
                                     })
                                 }}
                             </ProductConsumer>
@@ -23,4 +22,4 @@ class CinemaList extends Component {
     }
 }
 
-export default CinemaList;
+export default Review;
