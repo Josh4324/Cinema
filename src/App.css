@@ -95,8 +95,10 @@ ul {
 }
 
 a:hover{
-  background-color: rgb(61, 50, 50);
+  background-color: red;
 }
+
+/* Home Page | Review Page */
 
 .card1{
   width:100%!important;
@@ -132,6 +134,7 @@ a:hover{
   margin-top:20px;
   margin-left:20px;
 }
+
 .video{
   margin-top:20px;
   width:100%;
@@ -141,8 +144,12 @@ a:hover{
 .button{
   width:100%;
   margin-top:-50px;
-  background-color: blue;
+  background-color: orange;
   border-radius: 10px;
+}
+
+.white{
+  color:white;
 }
 
 .button:focus{
@@ -152,20 +159,33 @@ a:hover{
 .social-icon{
   font-size:1.5em;
   color:blue;
-  margin-left:10%;
-  
+}
+
+.block{
+  display:inline-block;
+  width:calc(100%/3);
+  text-align: center;
+  cursor:pointer;
+  height:100%;
+  padding-top:10px;
+  padding-bottom:10px;
+  border-radius: 5px;
+}
+
+.block:hover{
+  background-color: rgb(238, 230, 230);
 }
 
 .socialbuttons{
   margin-left:auto;
   margin-right:auto;
-  width:60%;
-  margin-top:10px;
+  width:100%;
+  height: 100%;
+  
 }
 
 .views{
   margin-left:10px;
-
 }
 
 .view-p{
@@ -186,6 +206,7 @@ a:hover{
 .icon-text{
   margin-left:10px;
   font-size:16px;
+  margin-top:10px;
 }
 
 .name{
@@ -207,42 +228,24 @@ a:hover{
   width:100%;
 }
 
+
+
+/* Discover Page */
+
 .image{
-  display: inline-block !important;
-  border: 2px solid blue;
-  border-radius:10px;
-  margin-right:10px;
+  display:inline;
 }
 
 .img{
-  width:600px;
-  height:400px;
-  padding: 10px;
-}
-
-.Image-container{
-  overflow-x: scroll !important;
-  overflow-y: hidden !important;
-  white-space: nowrap !important;
+  width:calc(100%/3);
+  height:300px;
   padding:10px;
 }
 
-#style-1::-webkit-scrollbar {
-  width: 1px !important;
+.Image-container{
+  margin:auto;
+  width:80%;
 }
-
-#style-1::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius:10px;
-}
-
-#style-1::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  background-color:black;
-  width: 0 !important;
-}
-
 
 .center-h3{
   text-align: center;
@@ -259,28 +262,10 @@ a:hover{
 .Discover-container{
   background-color: black;
   margin-top:0px;
+  width:100%;
 }
 
-.video-review{
-  width:600px;
-  height:400px;
-  padding: 10px;
-}
-
-.Video-container{
-  padding:10px;
-  overflow-x: scroll !important;
-  overflow-y: hidden !important;
-  white-space: nowrap !important;
-}
-
-.video-box{
-  display: inline-block !important;
-  border: 2px solid blue;
-  border-radius:10px;
-  margin-right:10px;
-  margin-bottom:10px;
-}
+/* Notification Page */
 
 .Notification{
   margin-left:auto;
@@ -379,13 +364,51 @@ input{
 }
 
 .active{
-  background-color:rgb(94, 34, 62);
+  color:orange;
+}
+
+.navnot{
+  display:block;
+  width:100%;
+  background-color: blue;
+  z-index: 1;
+}
+
+.nav-inline{
+  display: inline-block;
+  width:50%;
+  height:50px;
+  text-align: center;
+  padding-top:15px;
+  cursor: pointer;
+  color:white;
+}
+
+.nav-line:last-child{
+  border-right:1px solid black;
+}
+
+.nav-inline:hover{
+  background-color:orange;
 }
 /*Media Query*/
 
-@media (max-width:1150px){
+
+
+@media (max-width:1160px){
   .Search{
     margin-left:20px;
+  }
+
+  .Image-container{
+    margin:auto;
+    width:70%;
+  }
+
+  .img{
+    width:calc(100%/2);
+    height:300px;
+    padding:10px;
   }
 }
 
@@ -434,6 +457,8 @@ input{
   .icon{
     float:right;
   }
+
+  
 }
 
 @media (max-width:770px){
@@ -455,6 +480,17 @@ input{
 
   input{
     width:200px;
+  }
+
+  .Image-container{
+    margin:auto;
+    width:60%;
+  }
+
+  .img{
+    width:100%;
+    height:300px;
+    padding:10px;
   }
 
 }
@@ -488,11 +524,6 @@ input{
     padding: 1rem 2.32rem!important;
   }
 
-  .img{
-    width: 300px;
-    height:300px;
-  }
-
   .video-review{
     width: 330px;
     height:300px;
@@ -513,6 +544,13 @@ input{
   .form-h3{
     font-size:16px;
   }
+
+  .Image-container{
+    margin:auto;
+    width:90%;
+  }
+
+  
 }
 
 @media (max-width:414px){

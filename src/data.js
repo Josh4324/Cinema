@@ -91,32 +91,68 @@ export const cinemaData = [
       id:1,
       name:"Black Panther",
       image:"img/Black-Panther.jpg",
-      alt:"alt"
+      alt:"Black Panther",
     },
     {
       id:2,
       name:"Chief Daddy",
       image:"img/ChiefDaddy.jpg",
-      alt:"alt"
+      alt:"Chief Daddy",
     },
     {
       id:3,
       name:"Merry Men",
       image:"img/Merry-Men.jpg",
-      alt:"alt"
+      alt:"Merry Men",
     },
     {
       id:4,
       name:"Captain Marvel",
       image:"/img/Captain-Marvel.jpg",
-      alt:"alt"
+      alt:"Captain Marvel",
       
     },
     {
       id:5,
       name:"Avengers End-Game",
       image:"img/Avengers End_game.jpg",
-      alt:"alt"
+      alt:"Avengers End-Game",
+    },
+    {
+      id:6,
+      name:"Black Panther",
+      image:"img/Black-Panther.jpg",
+      alt:"alt",
+      big:true
+    },
+    {
+      id:7,
+      name:"Chief Daddy",
+      image:"img/ChiefDaddy.jpg",
+      alt:"alt",
+      big:true
+    },
+    {
+      id:8,
+      name:"Merry Men",
+      image:"img/Merry-Men.jpg",
+      alt:"alt",
+      big:true
+    },
+    {
+      id:9,
+      name:"Captain Marvel",
+      image:"/img/Captain-Marvel.jpg",
+      alt:"alt",
+      big:true
+      
+    },
+    {
+      id:10,
+      name:"Avengers End-Game",
+      image:"img/Avengers End_game.jpg",
+      alt:"alt",
+      big:true
     },
     
 
@@ -126,27 +162,32 @@ export const cinemaData = [
       {
       id:1,
       name:"Black Panther",
-      video:"https://www.youtube.com/embed/x02xX2dv6bQ"
+      video:"https://www.youtube.com/embed/x02xX2dv6bQ",
+      big:false
       },
       {
         id:2,
         name:"Chief Daddy",
-        video:"https://www.youtube.com/embed/hzO2BjNna90"
+        video:"https://www.youtube.com/embed/hzO2BjNna90",
+        big:false
       },
       {
         id:3,
         name:"Merry men",
-        video:"https://www.youtube.com/embed/OspStJSEtG4"
+        video:"https://www.youtube.com/embed/OspStJSEtG4",
+        big:false
       },
       {
         id:4,
         name:"Captain Marvel",
-        video:"https://www.youtube.com/embed/0LHxvxdRnYc"
+        video:"https://www.youtube.com/embed/0LHxvxdRnYc",
+        big:false
       },
       {
         id:5,
         name:"Avengers End-Game",
-        video:"https://www.youtube.com/embed/TcMBFSGVi1c"
+        video:"https://www.youtube.com/embed/TcMBFSGVi1c",
+        big:false
       },
 
   ]
@@ -201,5 +242,62 @@ export const cinemaData = [
       id:10,
       notification: 'Peter Liked Ozone Cinema Post',
       time:'40 minutes ago',
+    },
+  ]
+
+  export const mvideo = [
+    {
+      src: 'https://img.youtube.com/vi/x02xX2dv6bQ/0.jpg',
+      width: 681,
+      height: 800,
+      content:'x02xX2dv6bQ',
+      type: 'video',
+    },
+    {
+      src: 'https://img.youtube.com/vi/hzO2BjNna90/0.jpg',
+      width: 681,
+      height: 600,
+      content: 'hzO2BjNna90',
+      type: 'video',
+    },
+    {
+      src: 'https://img.youtube.com/vi/hzO2BjNna90/0.jpg',
+      width: 681,
+      height: 1024,
+      content: 'hzO2BjNna90',
+      type: 'video',
+    },
+    {
+      src: "https://www.youtube.com/embed/OspStJSEtG4",
+      width: 681,
+      height: 1024,
+      content: 'youtubeId2',
+      type: 'video',
+    },
+    {
+      src: "https://www.youtube.com/embed/0LHxvxdRnYc",
+      width: 681,
+      height: 1024,
+      content: 'youtubeId2',
+      type: 'video',
+    },
+  ]
+
+  export const mpic = [
+    {
+      src: "img/Black-Panther.jpg",
+      caption: 'image 1',
+    },
+    {
+      src: "img/ChiefDaddy.jpg",
+      caption: 'image 2',
+    },
+    {
+      src: "img/Merry-Men.jpg",
+      caption: 'image 2',
+    },
+    {
+      src: "img/Captain-Marvel.jpg",
+      caption: 'image 2',
     },
   ]

@@ -20,12 +20,12 @@ class Cinema extends Component {
                         </div>
                         <div >
                             <iframe className="video" autoPlay loop muted id="video" title={film_title} src={video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                            <button className="button">Buy Ticket</button>
+                            <button className="button"><span className="white">Buy Ticket</span></button>
                         </div>
                         <div className="socialbuttons mx-auto">
-                            <span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span>
-                            <span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span>
-                            <span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span>
+                            <span className="block"><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
+                            <span className="block"><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
+                            <span className="block"><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
                             <p className="view-p">{views} views</p>

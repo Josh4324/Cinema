@@ -16,9 +16,9 @@ class CinemaReview extends Component {
                             <button className="button">Buy Ticket</button>
                         </div>
                         <div className="socialbuttons mx-auto">
-                            <span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span>
-                            <span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span>
-                            <span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span>
+                            <span className="block"><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
+                            <span className="block"><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
+                            <span className="block"><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
                             <p className="view-p">{views} views</p>
