@@ -5,8 +5,9 @@ class Image extends Component {
         const {image,alt,name,big} = this.props.data;
         
         return (
-        <div className="image1">
-            <img className="img1"  src={image} alt={alt} />
+            <div className="image">
+            <img className="img"  src={image} alt={alt} />
+            <p className="image-name">{name}</p>
         </div>
         );
     }
