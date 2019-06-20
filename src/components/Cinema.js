@@ -2,9 +2,21 @@ import React, { Component } from 'react';
 import { ProductConsumer } from '../Context';
 
 class Cinema extends Component {
-    
+
+    constructor(props){
+        super(props);
+        this.myRef = React.createRef();
+    }
+
+    commentToggle = () => {
+        const nd = this.myRef.current
+        nd.classList.toggle("op");
+    }
+
     render() {
-        const {film_title, cinema_name, showing, video,views,comments} = this.props.data;
+        const {film_title, cinema_name, showing, video,views,comments,likes,dislikes,commentno} = this.props.data;
+        const id = this.props.new;
+        
         return (
             <div className="card card1 ">
                 <ProductConsumer>
@@ -23,18 +35,23 @@ class Cinema extends Component {
                             <button className="button"><span className="white">Buy Ticket</span></button>
                         </div>
                         <div className="socialbuttons mx-auto">
-                            <span className="block"><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
-                            <span className="block"><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
-                            <span className="block"><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
+                            <span className="block" onClick={() => value.addLikes(id)}><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
+                            <span className="block" onClick={() => value.addDislikes(id)}><span className="soc">{dislikes === 0 ? null : dislikes}</span><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
+                            <span className="block" onClick={this.commentToggle}><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
                             <p className="view-p">{views} views</p>
                         </div>
-                        <div className="comments">
-                            <span className="name">{comments[0].name}</span><span className="comment">{comments[0].comment}</span>
+                        <div ref={this.myRef}>
+                        {
+                            Object.keys(comments).map(key => (
+                        <div key={key} className="comments" >
+                            <span className="name">{comments[key].name}</span><span className="comment">{comments[key].comment}</span>
                         </div>
-                        <div className="write-comment">
-                            <input className="write" type="text" placeholder="write a comment...."></input>
+                        ))}
+                        </div>
+                        <div className="write-comment" >
+                            <div className="write"  contentEditable data-text="Write a comment ...." onKeyUp={(evt) => value.handlePress(evt,id)} ></div>
                         </div>
                     </div>
                         

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-import ReactDOM from 'react-dom'
 
 
 class Bar extends Component {
 
     toogle(){
-        const node = ReactDOM.findDOMNode(this.refs.tog);
+        const node = this.refs.tog
         node.classList.toggle('open');
     }
     

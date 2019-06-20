@@ -11,8 +11,8 @@ class CinemaList extends Component {
                         <div className="row">
                             <ProductConsumer>
                                 {(value) => {
-                                    return value.data.map(data => {
-                                        return <Cinema key={value.id} data={data}/>
+                                    return Object.keys(value.data).map(key => {
+                                        return <Cinema key={key} data={value.data[key]} new={key}/>
                                     })
                                 }}
                             </ProductConsumer>

@@ -157,7 +157,7 @@ a:hover{
 }
 
 .social-icon{
-  font-size:1.5em;
+  font-size:1.2em;
   color:blue;
 }
 
@@ -194,13 +194,17 @@ a:hover{
 
 .comments{
   border:1px solid blue;
-  border-radius:30px;
+  border-radius:5px;
   margin: 10px;
-  height:30px;
+  padding-left:10px;
 }
 
 .comment{
   margin-left:10px;
+}
+
+.op {
+  display:none;
 }
 
 .icon-text{
@@ -212,7 +216,6 @@ a:hover{
 .name{
   font-weight: bold;
   text-transform: capitalize;
-  margin-left:10px;
 }
 
 .write-comment{
@@ -222,10 +225,20 @@ a:hover{
 
 .write{
   border:1px solid blue;
-  border-radius:30px;
-  padding-left:20px;
-  height:30px;
   width:100%;
+  border-radius:10px;
+  padding-left:10px;
+  display:inline-block;
+  border: solid 1px #000;
+  min-height: 20px;
+}
+
+[contentEditable=true]:empty::before{
+  content:attr(data-text)
+}
+
+.ch{
+  padding-left:10px;
 }
 
 
@@ -452,6 +465,12 @@ input{
 
 .nav-inline:hover{
   background-color:orange;
+}
+
+.soc{
+  margin-right:5px;
+  padding-bottom:10px;
+  font-size:16px;
 }
 /*Media Query*/
 
