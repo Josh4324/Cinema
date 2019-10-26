@@ -23,11 +23,16 @@ class CinemaReview extends Component {
                         <div className="views">
                             <p className="view-p">{views} views</p>
                         </div>
-                        <div className="comments">
-                            <span className="name">{comments[0].name}</span><span className="comment">{comments[0].comment}</span>
+                        <div>
+                        {
+                            Object.keys(comments).map(key => (
+                        <div key={key} className="comments" >
+                            <span className="name">{comments[key].name}</span><span className="comment">{comments[key].comment}</span>
                         </div>
-                        <div className="write-comment">
-                            <input className="write" type="text" placeholder="write a comment...."></input>
+                        ))}
+                        </div>
+                        <div className="write-comment" >
+                            <div className="write"  contentEditable data-text="Write a comment ...."  ></div>
                         </div>
                     </div>
                         

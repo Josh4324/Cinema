@@ -4,8 +4,11 @@ import Cinema from './Cinema';
 
 
 class CinemaList extends Component {
+
     render() {
         return (
+            <div>
+        
             <div className="contain py-3">
                 <div className="container">
                         <div className="row">
@@ -18,6 +21,10 @@ class CinemaList extends Component {
                             </ProductConsumer>
                         </div>
                 </div>
+            </div>
+
+          
+
             </div>
         );
     }

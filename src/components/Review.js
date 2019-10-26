@@ -9,9 +9,9 @@ class Review extends Component {
                 <div className="container">
                         <div className="row">
                             <ProductConsumer>
-                                {(value) => {
-                                    return value.data.map(data => {
-                                        return <CinemaReview key={value.id} data={data}/>
+                            {(value) => {
+                                    return Object.keys(value.data).map(key => {
+                                        return <CinemaReview key={key} data={value.data[key]} new={key}/>
                                     })
                                 }}
                             </ProductConsumer>
