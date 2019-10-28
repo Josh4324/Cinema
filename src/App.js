@@ -16,7 +16,11 @@ import Login from './components/Login';
 import { fireAuth } from "./config/fire";
 import withAuthProtection from "./config/WithAuthProtection";
 
-const ProtectedRoute = withAuthProtection("/login")(CinemaList);
+const ProtectedRoute1 = withAuthProtection("/login")(CinemaList);
+const ProtectedRoute2 = withAuthProtection("/login")(Discover);
+const ProtectedRoute3 = withAuthProtection("/login")(Review);
+const ProtectedRoute4 = withAuthProtection("/login")(Notification);
+const ProtectedRoute5 = withAuthProtection("/login")(Add);
 
 class App extends Component {
 
@@ -78,7 +82,7 @@ class App extends Component {
 
         <Route exact path="/" render={
             props => (
-              <ProtectedRoute {...props} me={me} />
+              <ProtectedRoute1 {...props} me={me} />
             )
           } 
           />
@@ -96,12 +100,35 @@ class App extends Component {
             )
           } 
           />
+
+          <Route exact path="/Discover" render={
+            props => (
+              <ProtectedRoute2 {...props} me={me} />
+            )
+          } 
+          />
           
+          <Route exact path="/Review" render={
+            props => (
+              <ProtectedRoute3 {...props} me={me} />
+            )
+          } 
+          />
          
-          <Route  path="/Discover" component={Discover}></Route>
-          <Route  path="/Review" component={Review}></Route>
-          <Route  path="/Notification" component={Notification}></Route>
-          <Route  path="/Add" component={Add}></Route>
+         <Route exact path="/Notification" render={
+            props => (
+              <ProtectedRoute4 {...props} me={me} />
+            )
+          } 
+          />
+
+          <Route exact path="/Add" render={
+            props => (
+              <ProtectedRoute5 {...props} me={me} />
+            )
+          } 
+          />
+        
        </Switch>
      </div>
     );
