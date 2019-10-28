@@ -1,40 +1,32 @@
 import React, { Component } from 'react'
-import fire from '../config/fire';
-
 
 export default class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            fireErrors: '',
-            user: null,
-            
-        };
+            email: "",
+            password: "",
+            submitting: false
+          };
     }
 
-    componentDidMount(){
-       
-    }
-
-    
-    
-
-    handleChange = e => {
-        this.setState({[e.target.name]:e.target.value})
-    }
-
-    login = e => {
+    handleSubmit = e => {
         e.preventDefault();
-        fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
-        .catch((error) => {
-            this.setState({fireErrors: error.message})
-        });
-    }
+        const { onSubmit } = this.props;
+        const { email, password } = this.state;
+        if (onSubmit) {
+          this.setState({ submitting: true });
+          onSubmit(email, password);
+        }
+    };
 
+    handleChange = key => e => {
+        this.setState({ [key]: e.target.value });
+      };
 
+    
     render() {
+        const { email, password, submitting } = this.state;
         return (
             <div className="form_block">
 
@@ -44,18 +36,18 @@ export default class Login extends Component {
                 <div className="body">
                     <h3 className="log">Login</h3>
                   
-                    <form>
-                        <input placeholder="Enter your email" className="input" type="email" value={this.state.email}
-                        onChange={this.handleChange}
-                        name="email"
+                    <form onSubmit={this.handleSubmit}>
+                        <input placeholder="Enter your email" className="input" type="email"
+                        onChange={this.handleChange("email")}
+                        name="email" value={email}
                         />
 
-                        <input placeholder="Enter your password" className="input" type="password" value={this.state.password}
-                        onChange={this.handleChange}
-                        name="password"
+                        <input placeholder="Enter your password" className="input" type="password"
+                        onChange={this.handleChange("password")}
+                        name="password"  value={password}
                         />
 
-                        <input type="submit" className="input submit" onClick={this.login} value="Sign In"/>
+                        <input type="submit" className="input submit" value="Sign In"/>
                     </form>
                     <a className="forgot" href="/login">Forgot Your Password?</a>
                 </div>

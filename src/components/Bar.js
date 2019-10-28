@@ -8,8 +8,15 @@ class Bar extends Component {
         const node = this.refs.tog
         node.classList.toggle('open');
     }
+
+    handleSubmit = () => {
+        const { submit } = this.props;
+        submit()
+    };
     
     render() {
+        const { logState, me } = this.props;
+        console.log(logState, me)
         return (
             <div>
                 <nav className="nav">
@@ -26,7 +33,9 @@ class Bar extends Component {
                         <input type="text" className="Search-input" placeholder="Search for Tickets"></input>
                     </div>
                     <span className="elip" onClick={this.toogle.bind(this)}><i className="fas fa-ellipsis-v icon"></i></span>
-                   
+
+                    <a href="/" onClick={this.handleSubmit} className={ logState ? "log1" : "nothing"} >LogOut</a>
+                    
                 </nav>
             </div>
         );

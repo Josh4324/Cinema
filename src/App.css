@@ -745,3 +745,12 @@ input{
   background-color: blue;
   color:white;
 }
+
+.nothing {
+  display:none;
+}
+
+.log1 {
+  padding-top:20px;
+  margin-left:30px;
+}
