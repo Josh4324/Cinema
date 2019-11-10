@@ -34,7 +34,7 @@ class Bar extends Component {
                     </div>
                     <span className="elip" onClick={this.toogle.bind(this)}><i className="fas fa-ellipsis-v icon"></i></span>
 
-                    <a href="/" onClick={this.handleSubmit} className={ logState ? "log1" : "nothing"} >LogOut</a>
+                    <a href="/" onClick={this.handleSubmit} className={ this.props.me !== null ? "log1" : "nothing"} >LogOut</a>
                     
                 </nav>
             </div>

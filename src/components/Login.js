@@ -6,18 +6,25 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            submitting: false
           };
     }
+
+    
 
     handleSubmit = e => {
         e.preventDefault();
         const { onSubmit } = this.props;
         const { email, password } = this.state;
         if (onSubmit) {
-          this.setState({ submitting: true });
-          onSubmit(email, password);
+          onSubmit(email, password)
         }
+
+        let submitting = this.props.submitting
+        let err = this.props.err
+        this.setState({submitting : submitting})
+        this.setState({err: err})
+
+        
     };
 
     handleChange = key => e => {
@@ -48,6 +55,8 @@ export default class Login extends Component {
                         />
 
                         <input type="submit" className="input submit" value="Sign In"/>
+                        <div className= { this.props.submitting ? 'lds-ring' : null   } ><div></div><div></div><div></div><div></div></div>
+                        <div className={ this.props.err ? 'err': 'nothing' }>Email and Password do not match, please try again </div>
                     </form>
                     <a className="forgot" href="/login">Forgot Your Password?</a>
                 </div>

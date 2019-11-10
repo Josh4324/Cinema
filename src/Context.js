@@ -7,10 +7,12 @@ const ProductContext = React.createContext();
 //Consumer
 
 class ProductProvider extends Component {
-
+   
     state={
         data:[],
     }
+
+    
 
     componentDidMount() {
         this.setData();
@@ -22,13 +24,15 @@ class ProductProvider extends Component {
         });
     };
 
-    addLikes = (id) => {
+    addLikes = (id,history) => {
         let postid = Object.keys(this.state.data).find(key => key === id)
         let data = this.state.data[postid]
         data.likes += 1
         let newdata = this.state.data
         newdata[postid] = data
         this.setState({ data : newdata})
+
+
     }
 
     addDislikes = (id) => {

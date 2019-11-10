@@ -6,6 +6,7 @@ class Cinema extends Component {
     constructor(props){
         super(props);
         this.myRef = React.createRef();
+       
     }
 
     commentToggle = () => {
@@ -14,8 +15,11 @@ class Cinema extends Component {
     }
 
     render() {
-        const {film_title, cinema_name, showing, video,views,comments,likes,dislikes,commentno} = this.props.data;
+        const {film_title, cinema_name, showing, video,views,comments,likes,dislikes,commentno,} = this.props.data;
         const id = this.props.new;
+        const {logState, history } = this.props
+        console.log(this.props)
+       
         
         return (
             <div className="card card1 ">
@@ -35,9 +39,9 @@ class Cinema extends Component {
                             <button className="button"><span className="white">Buy Ticket</span></button>
                         </div>
                         <div className="socialbuttons mx-auto">
-                            <span className="block" onClick={() => value.addLikes(id)}><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
-                            <span className="block" onClick={() => value.addDislikes(id)}><span className="soc">{dislikes === 0 ? null : dislikes}</span><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
-                            <span className="block" onClick={this.commentToggle}><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
+                            <span className="block" onClick={() => { logState ? value.addLikes(id) : history.push(`/login`)}      }     ><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
+                            <span className="block" onClick={() =>  { logState ? value.addDislikes(id) : history.push(`/login`) }  } ><span className="soc">{dislikes === 0 ? null : dislikes}</span><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
+                            <span className="block" onClick={ () => (logState ? this.commentToggle : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
                             <p className="view-p">{views} views</p>

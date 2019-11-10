@@ -16,20 +16,20 @@ import Login from './components/Login';
 import { fireAuth } from "./config/fire";
 import withAuthProtection from "./config/WithAuthProtection";
 
-const ProtectedRoute1 = withAuthProtection("/login")(CinemaList);
-const ProtectedRoute2 = withAuthProtection("/login")(Discover);
-const ProtectedRoute3 = withAuthProtection("/login")(Review);
-const ProtectedRoute4 = withAuthProtection("/login")(Notification);
-const ProtectedRoute5 = withAuthProtection("/login")(Add);
+
+
 
 class App extends Component {
 
   constructor() {
     super();
     console.log("user", fireAuth.currentUser);
+    
     this.state = {
       me: JSON.parse(localStorage.getItem('me')),
-      logState: false
+      logState: false,
+      err: false,
+      submitting: false
     };
   }
 
@@ -38,6 +38,7 @@ class App extends Component {
     fireAuth.onAuthStateChanged(me => {
      
       localStorage.setItem('me', JSON.stringify(me));
+      
       this.setState({ 
         me,
         logState: value
@@ -49,23 +50,35 @@ class App extends Component {
   }
 
   handleSignIn = history => (email, password) => {
+    this.setState({submitting:true})
     return fireAuth.signInWithEmailAndPassword(email, password).then(() => {
       this.setState({logState:true})
+      console.log("done")
+      console.log(history)
       return history.push("/");
-    });
+      
+    },
+    err => {
+      this.setState({submitting:false})
+      this.setState({err: true})
+      console.log("error", err)
+    }
+    
+    );
+
   };
   
   handleSignUp = history => (email, password) => {
     return fireAuth.createUserWithEmailAndPassword(email, password).then(() => {
-      this.setState({logState:true})
       return history.push("/");
     });
   };
+  
 
   SignOut = history => () => {
     return fireAuth.signOut().then( () => {
-      this.setState({logState:false})
-      return history.push("/login")
+      console.log(history)
+      return history.push("/")
     })
   }
 
@@ -80,16 +93,11 @@ class App extends Component {
        <NavBar onSubmit={this.SignOut()} logState={logState} me={me}/>
        <Switch>
 
-        <Route exact path="/" render={
-            props => (
-              <ProtectedRoute1 {...props} me={me} />
-            )
-          } 
-          />
+          <Route exact path="/" render={ ({history}) => ( <CinemaList logState={logState} me={me} history={history}  / > )}  />
 
           <Route path="/login" render={
             ({ history}) => (
-              <Login onSubmit={this.handleSignIn(history)}/>
+              <Login err={this.state.err} submitting={this.state.submitting} onSubmit={this.handleSignIn(history)}/>
             )
           } 
           />
@@ -101,34 +109,10 @@ class App extends Component {
           } 
           />
 
-          <Route exact path="/Discover" render={
-            props => (
-              <ProtectedRoute2 {...props} me={me} />
-            )
-          } 
-          />
-          
-          <Route exact path="/Review" render={
-            props => (
-              <ProtectedRoute3 {...props} me={me} />
-            )
-          } 
-          />
-         
-         <Route exact path="/Notification" render={
-            props => (
-              <ProtectedRoute4 {...props} me={me} />
-            )
-          } 
-          />
-
-          <Route exact path="/Add" render={
-            props => (
-              <ProtectedRoute5 {...props} me={me} />
-            )
-          } 
-          />
-        
+          <Route exact path="/discover" render={ ({history}) => ( <Discover logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/review" render={ ({history}) => ( <Review logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/notification" render={ ({history}) => ( <Notification logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/add" render={ ({history}) => ( <Add logState={logState} me={me} history={history}  / > )}  />
        </Switch>
      </div>
     );

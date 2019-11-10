@@ -6,6 +6,9 @@ import Cinema from './Cinema';
 class CinemaList extends Component {
 
     render() {
+        const {history, logState} = this.props
+        console.log(this.props)
+       
         return (
             <div>
         
@@ -15,7 +18,7 @@ class CinemaList extends Component {
                             <ProductConsumer>
                                 {(value) => {
                                     return Object.keys(value.data).map(key => {
-                                        return <Cinema key={key} data={value.data[key]} new={key}/>
+                                        return <Cinema key={key} history={history} logState={logState}  data={value.data[key]} new={key}/>
                                     })
                                 }}
                             </ProductConsumer>
