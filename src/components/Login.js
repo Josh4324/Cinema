@@ -9,8 +9,6 @@ export default class Login extends Component {
           };
     }
 
-    
-
     handleSubmit = e => {
         e.preventDefault();
         const { onSubmit } = this.props;
@@ -33,7 +31,7 @@ export default class Login extends Component {
 
     
     render() {
-        const { email, password, submitting } = this.state;
+        const { email, password } = this.state;
         return (
             <div className="form_block">
 

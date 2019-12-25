@@ -7,7 +7,6 @@ class CinemaList extends Component {
 
     render() {
         const {history, logState} = this.props
-        console.log(this.props)
        
         return (
             <div>

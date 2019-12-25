@@ -18,7 +18,7 @@ class Cinema extends Component {
         const {film_title, cinema_name, showing, video,views,comments,likes,dislikes,commentno,} = this.props.data;
         const id = this.props.new;
         const {logState, history } = this.props
-        console.log(this.props)
+        console.log(logState)
        
         
         return (
