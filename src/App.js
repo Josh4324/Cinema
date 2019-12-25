@@ -47,18 +47,20 @@ class App extends Component {
         me,
         logState: value
       });
+
+      this.ref = base.syncState(`Users/${JSON.parse(localStorage.getItem('me')).uid}`, {
+        context: this,
+        state: "user"
+    });
+  
+    this.ref1 = base.syncState(`Posts/${JSON.parse(localStorage.getItem('me')).uid}`, {
+      context: this,
+      state: "post"
+  });
       }  
     },
     );
-    this.ref = base.syncState(`Users/${JSON.parse(localStorage.getItem('me')).uid}`, {
-      context: this,
-      state: "user"
-  })
-
-  this.ref1 = base.syncState(`Posts/${JSON.parse(localStorage.getItem('me')).uid}`, {
-    context: this,
-    state: "post"
-})
+    
   }
 
 
