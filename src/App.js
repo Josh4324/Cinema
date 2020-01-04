@@ -106,7 +106,7 @@ class App extends Component {
   
   handleSignUp = history => (email, password) => {
     return fireAuth.createUserWithEmailAndPassword(email, password).then(() => {
-      return history.push("/");
+      return history.push("/add");
     });
   };
   
@@ -115,7 +115,7 @@ class App extends Component {
     return fireAuth.signOut().then( () => {
       localStorage.removeItem('me')
       localStorage.removeItem('user')
-      return history.push("/add")
+      return history.push("/")
 
     })
   }
