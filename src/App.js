@@ -91,7 +91,7 @@ class App extends Component {
     this.setState({submitting:true})
     return fireAuth.signInWithEmailAndPassword(email, password).then(() => {
       this.setState({logState:true })
-      return history.push("/add");
+      return history.push("/");
       
     },
     err => {
@@ -115,7 +115,7 @@ class App extends Component {
     return fireAuth.signOut().then( () => {
       localStorage.removeItem('me')
       localStorage.removeItem('user')
-      return history.push("/")
+      return history.push("/add")
 
     })
   }
