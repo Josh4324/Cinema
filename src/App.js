@@ -15,7 +15,14 @@ import Add1 from './components/Add1';
 import Register from './components/Register';
 import Login from './components/Login';
 import {base, firebase, fireAuth} from "./config/fire";
+const randomId = require('random-id');
 
+const leng = 30;
+ 
+// pattern to determin how the id will be generated
+// default is aA0 it has a chance for lowercased capitals and numbers
+const pattern = 'aA0'
+ 
 
 
 
@@ -31,13 +38,15 @@ class App extends Component {
       logState: false,
       err: false,
       submitting: false,
-      user: null,
-      post:null
+      user: JSON.parse(localStorage.getItem('user')),
+      posts:{},
+      allposts:JSON.parse(localStorage.getItem('allposts')),
+      progress: 0
     };
   }
 
   componentDidMount() {
-    
+ 
     fireAuth.onAuthStateChanged(me => {
       if (me) {
 
@@ -47,28 +56,42 @@ class App extends Component {
         me,
         logState: value
       });
+      
 
-      this.ref = base.syncState(`Users/${JSON.parse(localStorage.getItem('me')).uid}`, {
+    this.ref = base.syncState(`Users/${JSON.parse(localStorage.getItem('me')).uid}`, {
         context: this,
         state: "user"
     });
   
     this.ref1 = base.syncState(`Posts/${JSON.parse(localStorage.getItem('me')).uid}`, {
       context: this,
-      state: "post"
-  });
-      }  
-    },
-    );
-    
-  }
+      state: "posts"
+    });
+  
 
+    }  
+  });
+
+  firebase.database().ref('Posts').on('value',(snap)=>{ 
+      console.log("data", snap.val());
+      let allposts = snap.val()
+      console.log("check", snap.val())
+      localStorage.setItem('allposts', JSON.stringify(allposts));
+      this.setState({allposts})
+  });
+
+  
+
+    
+}
+
+  
 
   handleSignIn = history => (email, password) => {
     this.setState({submitting:true})
     return fireAuth.signInWithEmailAndPassword(email, password).then(() => {
       this.setState({logState:true })
-      return history.push("/");
+      return history.push("/add");
       
     },
     err => {
@@ -90,18 +113,20 @@ class App extends Component {
 
   SignOut = history => () => {
     return fireAuth.signOut().then( () => {
-      console.log(history)
+      localStorage.removeItem('me')
+      localStorage.removeItem('user')
       return history.push("/")
+
     })
   }
 
-  AddData = (evt) => {
+  AddData = (evt, history) => {
     evt.preventDefault();
     let that = this;
     console.log("collected")
     let fullname = document.getElementById("fullname").value;
     let username = document.getElementById("username").value;
-    let pics = document.getElementById("pics").files[0]
+    let pics = document.getElementById("myFile").files[0]
     console.log(pics)
 
     // Create a root reference
@@ -124,6 +149,7 @@ class App extends Component {
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     console.log('Upload is ' + progress + '% done');
+    that.setState({progress})
     // eslint-disable-next-line default-case
     switch (snapshot.state) {
       case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -167,6 +193,7 @@ class App extends Component {
     if (user) {
       console.log(that)
       that.setState({user:user})
+      history.push('/')
     }
 
   });
@@ -175,17 +202,19 @@ class App extends Component {
     
   }
 
-  AddData1 = (evt) => {
+  AddData1 = (evt, history) => {
     let that = this;
     evt.preventDefault();
     console.log("collected")
-    let video = document.getElementById("video").files[0];
+    let video = document.getElementById("myFile").files[0];
     let caption = document.getElementById("caption").value;
     let title = document.getElementById("title").value;
     let view = document.getElementById("view").value;
     let comments = null;
     let likes = null;
     let dislikes = null;
+    const posttime = Date.now()
+
   
 
     // Create a root reference
@@ -196,11 +225,15 @@ class App extends Component {
       contentType: 'mp4'
     };
 
+    const le = 10;
+    const vid = randomId(le, pattern)
+
+
     // File or Blob named mountains.jpg
     const file = video
 
     // Upload file and metadata to the object 'images/mountains.jpg'
-    const uploadTask = storageRef.child('videos/' + file.name).put(file, metadata);
+    const uploadTask = storageRef.child('videos/' + vid).put(file, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -208,6 +241,7 @@ class App extends Component {
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     console.log('Upload is ' + progress + '% done');
+    that.setState({progress})
     // eslint-disable-next-line default-case
     switch (snapshot.state) {
       case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -239,7 +273,8 @@ class App extends Component {
   // Upload completed successfully, now we can get the download URL
   uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
     console.log('File available at', downloadURL);
-    
+    console.log('time',posttime)
+    const id = randomId(leng, pattern)
     const post = {
       video:downloadURL,
       caption,
@@ -248,15 +283,20 @@ class App extends Component {
       comments,
       likes,
       dislikes,
-      email: JSON.parse(localStorage.getItem('me')).email
+      email: JSON.parse(localStorage.getItem('me')).email,
+      key:id,
+      postt:posttime,
+      pics: that.state.user.pics,
+      fullname: that.state.user.fullname,
     }
 
     if (post) {
       console.log(that)
-      that.setState({post})
+      let posts = {...that.state.posts}
+      posts[id] = post
+      that.setState({posts})
+      history.push('/')
     }
-
-    console.log(post)
 
   });
 });
@@ -267,15 +307,15 @@ class App extends Component {
 
 
   render() {
-    const { me, logState } = this.state;
+    const { me, logState, allposts, user, progress } = this.state;
   
 
     return (
      <div>
-       <NavBar onSubmit={this.SignOut()} logState={logState} me={me}/>
+       <NavBar onSubmit={this.SignOut()} user={user} logState={logState} me={me}/>
        <Switch>
 
-          <Route exact path="/" render={ ({history}) => ( <CinemaList logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/" render={ ({history}) => ( <CinemaList logState={logState} me={me} history={history} data={allposts}   / > )}  />
 
           <Route path="/login" render={
             ({ history}) => (
@@ -294,8 +334,9 @@ class App extends Component {
           <Route exact path="/discover" render={ ({history}) => ( <Discover logState={logState} me={me} history={history}  / > )}  />
           <Route exact path="/review" render={ ({history}) => ( <Review logState={logState} me={me} history={history}  / > )}  />
           <Route exact path="/notification" render={ ({history}) => ( <Notification logState={logState} me={me} history={history}  / > )}  />
-          <Route exact path="/add" render={ ({history}) => ( <Add logState={logState} me={me} history={history} addDate={this.AddData}  / > )}  />
-          <Route exact path="/add1" render={ ({history}) => ( <Add1 logState={logState} me={me} history={history} addDate1={this.AddData1}  / > )}  />
+          <Route exact path="/add" render={ ({history}) => ( <Add logState={logState} progress={progress} me={me} history={history} addDate={this.AddData}  / > )}  />
+          <Route exact path="/add1" render={ ({history}) => ( <Add1 logState={logState} progress={progress} me={me} history={history} addDate1={this.AddData1}  / > )}  />
+          
        </Switch>
      </div>
     );

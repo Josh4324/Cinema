@@ -98,6 +98,10 @@ a:hover{
   background-color: red;
 }
 
+#nonav:hover {
+  background-color: rgb(253, 251, 251)
+}
+
 /* Home Page | Review Page */
 
 .card1{
@@ -116,9 +120,8 @@ a:hover{
 }
 
 .desc{
- float:left;
  line-height: 0.3em;
- margin-left:10px;
+ margin-left:80px;
 }
 
 .icon-person{
@@ -130,9 +133,10 @@ a:hover{
 }
 
 .card-header1{
-  background-color: blue;
   margin-top:20px;
   margin-left:20px;
+  margin-bottom: 20px;
+  display: block !important;
 }
 
 .video{
@@ -166,7 +170,6 @@ a:hover{
   width:calc(100%/3);
   text-align: center;
   cursor:pointer;
-  height:100%;
   padding-top:10px;
   padding-bottom:10px;
   border-radius: 5px;
@@ -180,8 +183,6 @@ a:hover{
   margin-left:auto;
   margin-right:auto;
   width:100%;
-  height: 100%;
-  
 }
 
 .views{
@@ -390,10 +391,9 @@ a:hover{
 }
 
 .form-box{
-  width:80%!important;
-  margin-left:auto;
-  margin-right:auto;
-  background-color:rgba(139, 193, 243, 0.89);
+  width:50%!important;
+  margin: auto;
+ 
   margin-top:40px;
   border-radius:30px;
 }
@@ -405,11 +405,10 @@ a:hover{
 }
 
 .form{
-  margin-top:30px;
+  margin-top:50px;
   margin-left:auto;
   margin-right:auto;
   margin-bottom: 100px;
-  height:100%;
   padding-left:100px;
 }
 
@@ -419,7 +418,6 @@ input{
   background-color:rgb(194, 193, 243);
   height:30px;
   width:400px;
-  border-radius:30px;
   padding-left:20px;
 }
 
@@ -430,7 +428,7 @@ input{
 }
 
 .form-block{
-  margin-bottom:30px;
+  margin-bottom:40px;
 }
 
 .button1{
@@ -797,3 +795,70 @@ input{
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+
+.videon {
+  display:inline-block;
+  width: 100%;
+}
+
+.container1 {
+  width: 50%;
+  margin:auto;
+}
+
+.userimage {
+  width:50px;
+}
+
+
+input[type=file] {
+  height:30px;
+  width:400px;
+  padding-left:20px;
+  display:none;
+}
+
+.file-upload {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.file-upload__input {
+  display: none;
+}
+
+.file-upload__button {
+  -webkit-appearance: none;
+  background: blue;
+  border: 2px solid #00745d;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.5em 0.8em;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-upload__button:active {
+  background: blue;
+}
+
+.file-upload__label {
+  max-width: 250px;
+  font-size: 0.95em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Quicksand", sans-serif;
+}
+

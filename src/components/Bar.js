@@ -15,12 +15,14 @@ class Bar extends Component {
     };
     
     render() {
-        const { logState, me } = this.props;
+        const { logState, me, user } = this.props;
         console.log(logState, me)
+        console.log(user)
+    
         return (
             <div>
                 <nav className="nav">
-                    <div className="brand"><i className="fas fa-user icon-user"></i></div>
+        <NavLink to="/add" id="nonav"><div className="brand"> { user !== null  ? <img src={user.pics} className="userimage" alt="user" /> : <i className="fas fa-user icon-user"></i> }</div></NavLink> 
                     <ul ref="tog" className='nav-inner nav-inner1'>
                         <li className="nav-item"><NavLink to="/" exact className="nav-link"><span className="text-none">Home</span><span className="ml-2"><i className="fas fa-home icon"></i></span></NavLink></li>
                         <li className="nav-item "><NavLink to="/Discover" className="nav-link"><span className="text-none">Discover</span><span className="ml-2"><i className="fas fa-compass icon"></i></span></NavLink></li>
@@ -34,7 +36,7 @@ class Bar extends Component {
                     </div>
                     <span className="elip" onClick={this.toogle.bind(this)}><i className="fas fa-ellipsis-v icon"></i></span>
 
-                    <a href="/" onClick={this.handleSubmit} className={ logState === true ? "log1" : "nothing"} >LogOut</a>
+                    <a href="/" onClick={this.handleSubmit} className={ me !== null ? "log1" : "nothing"} >LogOut</a>
                     
                 </nav>
             </div>
