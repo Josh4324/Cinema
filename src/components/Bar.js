@@ -34,10 +34,9 @@ class Bar extends Component {
                         <span><i className="fas fa-search icon-search"></i></span>
                         <input type="text" className="Search-input" placeholder="Search for Tickets"></input>
                     </div>
+                
+                    <a href="/" onClick={this.handleSubmit} className={ me !== null ? "log1" : "nothing"}> <span><i class="fas fa-power-off"></i></span> <span className="out">LogOut</span></a>
                     <span className="elip" onClick={this.toogle.bind(this)}><i className="fas fa-ellipsis-v icon"></i></span>
-
-                    <a href="/" onClick={this.handleSubmit} className={ me !== null ? "log1" : "nothing"} >LogOut</a>
-                    
                 </nav>
             </div>
         );

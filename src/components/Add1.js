@@ -50,7 +50,7 @@ class Add1 extends Component {
                 <div className="form-block"> 
 
                 <div class="file-upload">
-                    <input class="file-upload__input" type="file" name="myFile[]" id="myFile" />
+                    <input class="file-upload__input" type="file" name="myFile[]" id="myFile" accept="video/*" />
                     <button class="file-upload__button" type="button">Upload Video</button>
                     <span class="file-upload__label"></span>
                     <progress value={this.props.progress} max="100">{this.props.progress}</progress>

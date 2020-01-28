@@ -95,7 +95,8 @@ ul {
 }
 
 a:hover{
-  background-color: red;
+  background-color: orange;
+  text-decoration: none;
 }
 
 #nonav:hover {
@@ -152,6 +153,7 @@ a:hover{
   border-radius: 10px;
 }
 
+
 .white{
   color:white;
 }
@@ -173,6 +175,7 @@ a:hover{
   padding-top:10px;
   padding-bottom:10px;
   border-radius: 5px;
+
 }
 
 .block:hover{
@@ -210,7 +213,7 @@ a:hover{
 
 .icon-text{
   margin-left:10px;
-  font-size:16px;
+  font-size:14px;
   margin-top:10px;
 }
 
@@ -221,7 +224,6 @@ a:hover{
 
 .write-comment{
   margin:10px;
-
 }
 
 .write{
@@ -479,6 +481,15 @@ input{
     margin-left:20px;
   }
 
+  .nav-inner{
+    padding-left:50px;
+  }
+
+  .nav-link{
+    height: 100%;
+    padding: 20px 10px!important;
+  }
+
   .img1{
     width:calc(100%/2);
     height:300px;
@@ -528,8 +539,13 @@ input{
     padding-left:0px;
   }
 
+  .log1 {
+    margin-right:50px;
+  }
+
   .icon{
     float:right;
+    margin-bottom: 10px;
   }
 
   
@@ -585,12 +601,23 @@ input{
     z-index: 5;
   }
 
+  .nav-item {
+    display:inline-block;
+    width: calc(100%/5);
+  }
+
+  .icon {
+    float:none;
+    text-align: center;
+    
+  }
+
   .video{
     height:250px;
   }
 
   .nav-item{
-    float:left;
+    float:none;
   }
 
   .text-none{
@@ -598,7 +625,8 @@ input{
   }
 
   .nav-link{
-    padding: 1rem 2.32rem!important;
+    padding: 0;
+    margin:0;
   }
 
   .video-review{
@@ -625,48 +653,28 @@ input{
   
 }
 
-@media (max-width:414px){
-  .nav-link{
-    padding: 1rem 1.85rem!important;
+@media (max-width:420px) {
+    .log1 {
+        margin-left:5px !important;
+    }
+
+    
+}
+
+@media (max-width:375px) {
+  .out {
+    display:none !important;
   }
 }
 
-
-@media (max-width:412px){
-  .nav-link{
-    padding: 1rem 1.82rem!important;
-  }
-}
-
-@media (max-width:384px){
-  .nav-link{
-    padding: 1rem 1.63rem!important;
-  }
-}
-
-@media (max-width:375px){
-  .nav-link{
-    padding: 1rem 1.56rem!important;
-  }
-}
-
-@media (max-width:360px){
-  .nav-link{
-    padding: 1rem 1.47rem!important;
-  }
-}
-
-@media (max-width:320px){
-  .nav-link{
-    padding: 1rem 1.17rem!important;
+@media (max-width:320px) {
+  .Search{
+    margin-left:10px;
   }
 
-  .social-icon{
-    margin-left:20px;
-  }
-
-  .desc{
-    font-size:12px!important;
+  .brand {
+    margin: 5px;
+    margin-left: 5px !important;
   }
 }
 
@@ -675,13 +683,14 @@ input{
 /* new Css */
 
 .form_block {
-  margin-top: 100px;
+  margin-top: 60px;
   width: 500px;
   margin-left:auto;
   margin-right: auto;
   background: blue;
   padding-top:20px;
   padding-bottom: 20px;
+  border-radius: 5px;
 }
 
 .input {
@@ -702,6 +711,7 @@ input{
   padding-top:30px;
   padding-bottom: 30px;
   margin-top:20px;
+  border-radius: 5px;
 }
 
 .log {
@@ -720,6 +730,7 @@ input{
   display:block;
   text-align: center;
   font-size:16px;
+  text-decoration: none;
   
 }
 
@@ -736,7 +747,7 @@ input{
 }
 
 .reg {
-  color:white;
+  color:lightblue;
 }
 
 .reg:hover {
@@ -749,12 +760,52 @@ input{
 }
 
 .log1 {
-  padding-top:20px;
+  padding:20px 10px !important;
   margin-left:30px;
 }
 
+.log1:hover {
+  text-decoration: none;
+}
+
 .err {
-  padding:5px;
+  padding-left: 5px;
+  padding-right:5px;
+  font-size: smaller;
+  text-align:center;
+}
+
+@media (max-width:540px) {
+  .form_block {
+    width: 80%;
+    margin-top: 20px;
+  }
+
+  .body {
+    width:90%;
+    margin-top:10px;
+    margin-bottom: 10px;;
+  }
+
+  .input {
+    width: 90%;
+  }
+
+}
+
+@media (max-width:450px) {
+  .form_block {
+    width: 99%;
+  }
+
+  .body {
+    width:95%;
+  }
+
+  .input {
+    width: 99%;
+  }
+
 }
 
 
@@ -796,12 +847,6 @@ input{
   }
 }
 
-
-
-
-
-
-
 .videon {
   display:inline-block;
   width: 100%;
@@ -810,6 +855,35 @@ input{
 .container1 {
   width: 50%;
   margin:auto;
+}
+
+@media (max-width:1200px) {
+  .container1 {
+    width: 70%;
+  }
+}
+
+@media (max-width:540px) {
+  .container1 {
+    width: 90%;
+  }
+}
+
+@media (max-width:320px) {
+  .icon-text{
+    display:block;
+    margin:0;
+    text-align:center;
+  }
+
+  .social-icon{
+    text-align:center;
+    margin:0;
+  }
+
+  .icon-text{
+    margin-left:0px;
+  }
 }
 
 .userimage {

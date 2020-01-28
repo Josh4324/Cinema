@@ -41,7 +41,8 @@ class App extends Component {
       user: JSON.parse(localStorage.getItem('user')),
       posts:{},
       allposts:JSON.parse(localStorage.getItem('allposts')),
-      progress: 0
+      progress: 0,
+      submitted:false,
     };
   }
 
@@ -88,9 +89,11 @@ class App extends Component {
   
 
   handleSignIn = history => (email, password) => {
+    this.setState({err:false})
     this.setState({submitting:true})
     return fireAuth.signInWithEmailAndPassword(email, password).then(() => {
       this.setState({logState:true })
+      this.setState({submitting:false})
       return history.push("/");
       
     },
@@ -105,9 +108,18 @@ class App extends Component {
   };
   
   handleSignUp = history => (email, password) => {
+    this.setState({err:false})
+    this.setState({submitting:true})
     return fireAuth.createUserWithEmailAndPassword(email, password).then(() => {
+      this.setState({submitting:false})
       return history.push("/add");
-    });
+    },
+    err => {
+      this.setState({submitting:false})
+      this.setState({err: true})
+      console.log("error", err)
+    }
+    );
   };
   
 
@@ -319,14 +331,14 @@ class App extends Component {
 
           <Route path="/login" render={
             ({ history}) => (
-              <Login err={this.state.err} submitting={this.state.submitting} onSubmit={this.handleSignIn(history)}/>
+              <Login err={this.state.err}  submitting={this.state.submitting} onSubmit={this.handleSignIn(history)}/>
             )
           } 
           />
 
            <Route path="/register" render={
             ({ history}) => (
-              <Register onSubmit={this.handleSignUp(history)}/>
+              <Register err={this.state.err} submitting={this.state.submitting} onSubmit={this.handleSignUp(history)}/>
             )
           } 
           />

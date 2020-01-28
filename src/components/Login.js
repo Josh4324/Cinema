@@ -15,15 +15,15 @@ export default class Login extends Component {
         const { email, password } = this.state;
         if (onSubmit) {
           onSubmit(email, password)
-        }
-
-        let submitting = this.props.submitting
-        let err = this.props.err
-        this.setState({submitting : submitting})
-        this.setState({err: err})
-
-        
+          if (this.props.err){
+              this.setState({email:''})
+              this.setState({password:''})
+          }
+          
+        }  
     };
+
+
 
     handleChange = key => e => {
         this.setState({ [key]: e.target.value });
