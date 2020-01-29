@@ -393,11 +393,10 @@ a:hover{
 }
 
 .form-box{
-  width:50%!important;
-  margin: auto;
- 
+  margin:auto;
   margin-top:40px;
   border-radius:30px;
+  width:500px
 }
 
 .form-h3{
@@ -411,15 +410,14 @@ a:hover{
   margin-left:auto;
   margin-right:auto;
   margin-bottom: 100px;
-  padding-left:100px;
 }
 
 input{
   display: block;
+  width:500px;
   border: 1px solid rgb(72, 72, 109);
   background-color:rgb(194, 193, 243);
   height:30px;
-  width:400px;
   padding-left:20px;
 }
 
@@ -568,9 +566,7 @@ input{
     width:90%!important;
   }
 
-  input{
-    width:200px;
-  }
+ 
 
   .img1{
     width:calc(100%/2);
@@ -693,15 +689,6 @@ input{
   border-radius: 5px;
 }
 
-.input {
-  width: 300px;
-  margin-left:auto;
-  margin-right: auto;
-  background-color: white;
-  border-radius: 5px;
-  height: 40px;
-  margin-bottom:10px;
-}
 
 .body {
   background-color: white;
@@ -893,7 +880,6 @@ input{
 
 input[type=file] {
   height:30px;
-  width:400px;
   padding-left:20px;
   display:none;
 }
@@ -934,5 +920,29 @@ input[type=file] {
   overflow: hidden;
   white-space: nowrap;
   font-family: "Quicksand", sans-serif;
+}
+
+
+@media (max-width:600px) {
+  .form-box{
+   width:80%
+  }
+
+input {
+  width:100%
+  }
+
+}
+
+@media (max-width:490px) {
+  .form-box{
+   width:100%
+  }
+
+input {
+  width:95%
+  }
+
+
 }
 
