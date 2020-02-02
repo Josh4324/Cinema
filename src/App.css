@@ -95,7 +95,12 @@ ul {
 }
 
 a:hover{
-  background-color: red;
+  background-color: orange;
+  text-decoration: none;
+}
+
+#nonav:hover {
+  background-color: rgb(253, 251, 251)
 }
 
 /* Home Page | Review Page */
@@ -116,9 +121,8 @@ a:hover{
 }
 
 .desc{
- float:left;
  line-height: 0.3em;
- margin-left:10px;
+ margin-left:80px;
 }
 
 .icon-person{
@@ -130,9 +134,10 @@ a:hover{
 }
 
 .card-header1{
-  background-color: blue;
   margin-top:20px;
   margin-left:20px;
+  margin-bottom: 20px;
+  display: block !important;
 }
 
 .video{
@@ -147,6 +152,7 @@ a:hover{
   background-color: orange;
   border-radius: 10px;
 }
+
 
 .white{
   color:white;
@@ -166,10 +172,10 @@ a:hover{
   width:calc(100%/3);
   text-align: center;
   cursor:pointer;
-  height:100%;
   padding-top:10px;
   padding-bottom:10px;
   border-radius: 5px;
+
 }
 
 .block:hover{
@@ -180,8 +186,6 @@ a:hover{
   margin-left:auto;
   margin-right:auto;
   width:100%;
-  height: 100%;
-  
 }
 
 .views{
@@ -209,7 +213,7 @@ a:hover{
 
 .icon-text{
   margin-left:10px;
-  font-size:16px;
+  font-size:14px;
   margin-top:10px;
 }
 
@@ -220,7 +224,6 @@ a:hover{
 
 .write-comment{
   margin:10px;
-
 }
 
 .write{
@@ -390,12 +393,10 @@ a:hover{
 }
 
 .form-box{
-  width:80%!important;
-  margin-left:auto;
-  margin-right:auto;
-  background-color:rgba(139, 193, 243, 0.89);
+  margin:auto;
   margin-top:40px;
   border-radius:30px;
+  width:500px
 }
 
 .form-h3{
@@ -405,21 +406,18 @@ a:hover{
 }
 
 .form{
-  margin-top:30px;
+  margin-top:50px;
   margin-left:auto;
   margin-right:auto;
   margin-bottom: 100px;
-  height:100%;
-  padding-left:100px;
 }
 
 input{
   display: block;
+  width:500px;
   border: 1px solid rgb(72, 72, 109);
   background-color:rgb(194, 193, 243);
   height:30px;
-  width:400px;
-  border-radius:30px;
   padding-left:20px;
 }
 
@@ -430,7 +428,7 @@ input{
 }
 
 .form-block{
-  margin-bottom:30px;
+  margin-bottom:40px;
 }
 
 .button1{
@@ -479,6 +477,15 @@ input{
 @media (max-width:1160px){
   .Search{
     margin-left:20px;
+  }
+
+  .nav-inner{
+    padding-left:50px;
+  }
+
+  .nav-link{
+    height: 100%;
+    padding: 20px 10px!important;
   }
 
   .img1{
@@ -530,8 +537,13 @@ input{
     padding-left:0px;
   }
 
+  .log1 {
+    margin-right:50px;
+  }
+
   .icon{
     float:right;
+    margin-bottom: 10px;
   }
 
   
@@ -554,9 +566,7 @@ input{
     width:90%!important;
   }
 
-  input{
-    width:200px;
-  }
+ 
 
   .img1{
     width:calc(100%/2);
@@ -587,12 +597,23 @@ input{
     z-index: 5;
   }
 
+  .nav-item {
+    display:inline-block;
+    width: calc(100%/5);
+  }
+
+  .icon {
+    float:none;
+    text-align: center;
+    
+  }
+
   .video{
     height:250px;
   }
 
   .nav-item{
-    float:left;
+    float:none;
   }
 
   .text-none{
@@ -600,7 +621,8 @@ input{
   }
 
   .nav-link{
-    padding: 1rem 2.32rem!important;
+    padding: 0;
+    margin:0;
   }
 
   .video-review{
@@ -627,48 +649,28 @@ input{
   
 }
 
-@media (max-width:414px){
-  .nav-link{
-    padding: 1rem 1.85rem!important;
+@media (max-width:420px) {
+    .log1 {
+        margin-left:5px !important;
+    }
+
+    
+}
+
+@media (max-width:375px) {
+  .out {
+    display:none !important;
   }
 }
 
-
-@media (max-width:412px){
-  .nav-link{
-    padding: 1rem 1.82rem!important;
-  }
-}
-
-@media (max-width:384px){
-  .nav-link{
-    padding: 1rem 1.63rem!important;
-  }
-}
-
-@media (max-width:375px){
-  .nav-link{
-    padding: 1rem 1.56rem!important;
-  }
-}
-
-@media (max-width:360px){
-  .nav-link{
-    padding: 1rem 1.47rem!important;
-  }
-}
-
-@media (max-width:320px){
-  .nav-link{
-    padding: 1rem 1.17rem!important;
+@media (max-width:320px) {
+  .Search{
+    margin-left:10px;
   }
 
-  .social-icon{
-    margin-left:20px;
-  }
-
-  .desc{
-    font-size:12px!important;
+  .brand {
+    margin: 5px;
+    margin-left: 5px !important;
   }
 }
 
@@ -677,24 +679,16 @@ input{
 /* new Css */
 
 .form_block {
-  margin-top: 100px;
+  margin-top: 60px;
   width: 500px;
   margin-left:auto;
   margin-right: auto;
   background: blue;
   padding-top:20px;
   padding-bottom: 20px;
+  border-radius: 5px;
 }
 
-.input {
-  width: 300px;
-  margin-left:auto;
-  margin-right: auto;
-  background-color: white;
-  border-radius: 5px;
-  height: 40px;
-  margin-bottom:10px;
-}
 
 .body {
   background-color: white;
@@ -704,6 +698,7 @@ input{
   padding-top:30px;
   padding-bottom: 30px;
   margin-top:20px;
+  border-radius: 5px;
 }
 
 .log {
@@ -722,6 +717,7 @@ input{
   display:block;
   text-align: center;
   font-size:16px;
+  text-decoration: none;
   
 }
 
@@ -738,7 +734,7 @@ input{
 }
 
 .reg {
-  color:white;
+  color:lightblue;
 }
 
 .reg:hover {
@@ -751,12 +747,52 @@ input{
 }
 
 .log1 {
-  padding-top:20px;
+  padding:20px 10px !important;
   margin-left:30px;
 }
 
+.log1:hover {
+  text-decoration: none;
+}
+
 .err {
-  padding:5px;
+  padding-left: 5px;
+  padding-right:5px;
+  font-size: smaller;
+  text-align:center;
+}
+
+@media (max-width:540px) {
+  .form_block {
+    width: 80%;
+    margin-top: 20px;
+  }
+
+  .body {
+    width:90%;
+    margin-top:10px;
+    margin-bottom: 10px;;
+  }
+
+  .input {
+    width: 90%;
+  }
+
+}
+
+@media (max-width:450px) {
+  .form_block {
+    width: 99%;
+  }
+
+  .body {
+    width:95%;
+  }
+
+  .input {
+    width: 99%;
+  }
+
 }
 
 
@@ -797,3 +833,116 @@ input{
     transform: rotate(360deg);
   }
 }
+
+.videon {
+  display:inline-block;
+  width: 100%;
+}
+
+.container1 {
+  width: 50%;
+  margin:auto;
+}
+
+@media (max-width:1200px) {
+  .container1 {
+    width: 70%;
+  }
+}
+
+@media (max-width:540px) {
+  .container1 {
+    width: 90%;
+  }
+}
+
+@media (max-width:320px) {
+  .icon-text{
+    display:block;
+    margin:0;
+    text-align:center;
+  }
+
+  .social-icon{
+    text-align:center;
+    margin:0;
+  }
+
+  .icon-text{
+    margin-left:0px;
+  }
+}
+
+.userimage {
+  width:50px;
+}
+
+
+input[type=file] {
+  height:30px;
+  padding-left:20px;
+  display:none;
+}
+
+.file-upload {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.file-upload__input {
+  display: none;
+}
+
+.file-upload__button {
+  -webkit-appearance: none;
+  background: blue;
+  border: 2px solid #00745d;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.5em 0.8em;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-upload__button:active {
+  background: blue;
+}
+
+.file-upload__label {
+  max-width: 250px;
+  font-size: 0.95em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Quicksand", sans-serif;
+}
+
+
+@media (max-width:600px) {
+  .form-box{
+   width:80%
+  }
+
+input {
+  width:100%
+  }
+
+}
+
+@media (max-width:490px) {
+  .form-box{
+   width:100%
+  }
+
+input {
+  width:95%
+  }
+
+
+}
+

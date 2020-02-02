@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
-class Add extends Component {
-    componentDidMount(){
+class Add1 extends Component {
+
+    state = {
+
+    }
+
+    componentDidMount() {
         Array.prototype.forEach.call(
             document.querySelectorAll(".file-upload__button"),
             function(button) {
@@ -31,39 +36,52 @@ class Add extends Component {
               });
             }
           );
+          
     }
+    
     render() {
         console.log(this.props);
         return (
             <div>
                 <div className="form-box">
-                <h3 className="form-h3">Profile</h3>
+            
                 <form className="form">
-                    <div className="form-block">
-                    <label htmlFor="CinemaName">Full Name</label>
-                    <input type="text" name="fullname" placeholder="Full Name" id="fullname" />
-                    </div>
-                    <div className="form-block">
-                    <label htmlFor="FilmTitle">username</label>
-                    <input type="text" name="username" placeholder="Username" id="username"/>
+
+                <div className="form-block"> 
+
+                    <div class="file-upload">
+                        <input class="file-upload__input" type="file" name="myFile[]" id="myFile" accept="video/*" />
+                        <button class="file-upload__button" type="button">Upload Video</button>
+                        <span class="file-upload__label"></span>
+                        <progress className="progress" value={this.props.progress} max="100">{this.props.progress}</progress>
                     </div>
 
+                </div>
+
+
+                    
                     <div className="form-block">
-                    <div class="file-upload">
-                    <input class="file-upload__input" type="file" name="myFile[]" id="myFile" />
-                    <button class="file-upload__button" type="button">Upload Proflie Picture</button>
-                    <span class="file-upload__label"></span>
-                    <progress value={this.props.progress} max="100">{this.props.progress}</progress>
-                    </div>
+                    <label htmlFor="caption">Caption</label>
+                    <input type="text" name="caption" placeholder="Write a caption" id="caption"/>
                     </div>
                     <div className="form-block">
-                        <button onClick={(evt) => this.props.addDate(evt, this.props.history)} className="button1 button">Submit</button>
+                    <label htmlFor="title">Film Title</label>
+                    <input type='text' name="title" placeholder="Film Title" id="title" />
+                    </div>
+                    <div className="form-block">
+                    <label htmlFor="view">Viewing Time</label>
+                    <input type='datetime-local' name="view" placeholder="Viewing Time" id="view" />
+                    </div>
+                    <div className="form-block">
+                        <button onClick={(evt) => this.props.addDate1(evt, this.props.history)} className="button1 button">Submit</button>
                     </div>
                 </form>
+
+
                 </div>
             </div>
         );
     }
 }
 
-export default Add;
+export default Add1;

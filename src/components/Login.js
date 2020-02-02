@@ -9,23 +9,21 @@ export default class Login extends Component {
           };
     }
 
-    
-
     handleSubmit = e => {
         e.preventDefault();
         const { onSubmit } = this.props;
         const { email, password } = this.state;
         if (onSubmit) {
           onSubmit(email, password)
-        }
-
-        let submitting = this.props.submitting
-        let err = this.props.err
-        this.setState({submitting : submitting})
-        this.setState({err: err})
-
-        
+          if (this.props.err){
+              this.setState({email:''})
+              this.setState({password:''})
+          }
+          
+        }  
     };
+
+
 
     handleChange = key => e => {
         this.setState({ [key]: e.target.value });
@@ -33,7 +31,7 @@ export default class Login extends Component {
 
     
     render() {
-        const { email, password, submitting } = this.state;
+        const { email, password } = this.state;
         return (
             <div className="form_block">
 

@@ -1,5 +1,6 @@
-import firebase from "firebase/app";
 import "firebase/auth";
+import firebase from "firebase";
+import Rebase from "re-base";
 
 
 const config = {
@@ -15,5 +16,8 @@ const config = {
 
 
 const firebaseApp = firebase.initializeApp(config);
+const base = Rebase.createClass(firebaseApp.database());
 
-export const fireAuth = firebaseApp.auth();
+
+const fireAuth = firebaseApp.auth();
+export {base, fireAuth, firebase }

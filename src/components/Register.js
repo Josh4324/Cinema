@@ -6,7 +6,7 @@ export default class Register extends Component {
         this.state = {
             email: "",
             password: "",
-            submitting: false
+        
           };
     }
 
@@ -15,8 +15,11 @@ export default class Register extends Component {
         const { onSubmit } = this.props;
         const { email, password } = this.state;
         if (onSubmit) {
-          this.setState({ submitting: true });
           onSubmit(email, password);
+          if (this.props.err){
+            this.setState({email:''})
+            this.setState({password:''})
+        }
         }
     };
 
@@ -28,7 +31,7 @@ export default class Register extends Component {
 
 
     render() {
-        const { email, password, submitting } = this.state;
+        const { email, password} = this.state;
         return (
             <div className="form_block">
 
@@ -50,6 +53,8 @@ export default class Register extends Component {
                     />
 
                     <input type="submit" className="input submit"  value="Register"/>
+                    <div className= { this.props.submitting ? 'lds-ring' : null   } ><div></div><div></div><div></div><div></div></div>
+                    <div className={ this.props.err ? 'err': 'nothing' }>Error , please try again </div>
                 </form>
                
             </div>

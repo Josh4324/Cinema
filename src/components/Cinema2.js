@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ProductConsumer } from '../Context';
 
-class Cinema extends Component {
+class Cinema2 extends Component {
 
     constructor(props){
         super(props);
@@ -15,10 +15,13 @@ class Cinema extends Component {
     }
 
     render() {
-        const {film_title, cinema_name, showing, video,views,comments,likes,dislikes,commentno,} = this.props.data;
+        const {caption,email,video,title,view, pics, fullname} = this.props.newdata;
         const id = this.props.new;
-        const {logState, history, newdata } = this.props
+        const {logState, history, newdata, } = this.props
         console.log("new", newdata)
+        let likes = 0
+        let dislikes = 0
+        let commentno = 0
        
         
         return (
@@ -27,16 +30,17 @@ class Cinema extends Component {
                     {(value) => (
                     <div>
                         <div className="card-header1">
-                            <div className="person"><i className="fas fa-user icon-person"></i></div>
+                            <div>
+                    <div className="person">{ pics !== null ? <img src={pics} className="userimage" alt={fullname} /> : <i className="fas fa-user icon-person"></i>}</div>
                             <div className="desc">
-                                <p>{cinema_name}</p>
-                                <p>{film_title}</p>
-                                <p>{showing}</p>
+                                <p>Cinema name</p>
+                                <p>{title}</p>
+                                <p>{view}</p>
+                            </div>
                             </div>
                         </div>
-                        <div >
-                          
-                            <iframe className="video" autoPlay loop muted id="video" title={film_title} src={video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        <div>
+                            <video src={video} className="videon" controls type="video/mp4"  />
                             <button className="button"><span className="white">Buy Ticket</span></button>
                         </div>
                         <div className="socialbuttons mx-auto">
@@ -45,15 +49,9 @@ class Cinema extends Component {
                             <span className="block" onClick={ () => (logState ? this.commentToggle : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
-                            <p className="view-p">{views} views</p>
+                            <p className="view-p">300 views</p>
                         </div>
                         <div ref={this.myRef}>
-                        {
-                            Object.keys(comments).map(key => (
-                        <div key={key} className="comments" >
-                            <span className="name">{comments[key].name}</span><span className="comment">{comments[key].comment}</span>
-                        </div>
-                        ))}
                         </div>
                         <div className="write-comment" >
                             <div className="write"  contentEditable data-text="Write a comment ...." onKeyUp={(evt) => value.handlePress(evt,id)} ></div>
@@ -68,4 +66,4 @@ class Cinema extends Component {
     }
 }
 
-export default Cinema;
+export default Cinema2;

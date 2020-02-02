@@ -7,7 +7,7 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-               <Bar submit={this.props.onSubmit} me={this.props.me} logState={this.props.logState}></Bar>
+               <Bar submit={this.props.onSubmit} me={this.props.me} user={this.props.user} logState={this.props.logState}></Bar>
             </div>
         );
     }
