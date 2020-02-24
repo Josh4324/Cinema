@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
-import { ProductConsumer } from '../Context';
+
 
 class Cinema2 extends Component {
 
-    constructor(props){
-        super(props);
-        this.myRef = React.createRef();
-       
-    }
 
-    commentToggle = () => {
-        const nd = this.myRef.current
-        nd.classList.toggle("op");
-    }
+    
 
     render() {
-        const {caption,email,video,title,view, pics, fullname} = this.props.newdata;
-        const id = this.props.new;
-        const {logState, history, newdata, } = this.props
+        const {video,title,view, pics, fullname, meid, key, likes, dislikes,commentsList} = this.props.newdata;
+        const {history, newdata, disLikes, addLikes, me, addComment, user_meid } = this.props
         console.log("new", newdata)
-        let likes = 0
-        let dislikes = 0
-        let commentno = 0
+        let commentno;
+        if (commentsList === undefined){
+            commentno = 0
+        }else{
+            commentno = commentsList.length
+        }
+        
        
         
         return (
             <div className="card card1 ">
-                <ProductConsumer>
-                    {(value) => (
+               
                     <div>
                         <div className="card-header1">
                             <div>
@@ -44,9 +38,9 @@ class Cinema2 extends Component {
                             <button className="button"><span className="white">Buy Ticket</span></button>
                         </div>
                         <div className="socialbuttons mx-auto">
-                            <span className="block" onClick={() => { logState ? value.addLikes(id) : history.push(`/login`)}      }     ><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
-                            <span className="block" onClick={() =>  { logState ? value.addDislikes(id) : history.push(`/login`) }  } ><span className="soc">{dislikes === 0 ? null : dislikes}</span><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
-                            <span className="block" onClick={ () => (logState ? this.commentToggle : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
+                            <span className="block" onClick={() => { me !== null ? addLikes(meid,key,user_meid) : history.push(`/login`)}      }     ><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
+                            <span className="block" onClick={() =>  { me !== null ? disLikes(meid,key,user_meid) : history.push(`/login`) }  } ><span className="soc">{dislikes === 0 ? null : dislikes}</span><span><i className="fas fa-thumbs-down social-icon "></i></span><span className="icon-text">Dislike</span></span>
+                            <span className="block" onClick={ () => (me !== null ? null : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
                             <p className="view-p">300 views</p>
@@ -54,12 +48,32 @@ class Cinema2 extends Component {
                         <div ref={this.myRef}>
                         </div>
                         <div className="write-comment" >
-                            <div className="write"  contentEditable data-text="Write a comment ...." onKeyUp={(evt) => value.handlePress(evt,id)} ></div>
+                            <div className="write" onKeyUp = { (evt) => addComment(evt,meid,key)}  contentEditable data-text="Write a comment ...."  ></div>
                         </div>
+
+                        { commentsList === undefined ? <div></div> :
+
+                        <div>{  
+                            commentsList.map((item) => {
+                                if (item !== null){
+                                    return <div className="commentlist">
+                                        <span><img className="cimg" src={item.pics} alt=""/></span>
+                                        <div className="comment">
+                                            <span className="cname">{item.name}</span>
+                                            <span>{item.comment}</span>
+                                        </div>
+                                        
+                                    </div>
+                                }
+                                
+                            })
+                        }</div>
+
+                    }
+                        
                     </div>
                         
-                    )}
-                </ProductConsumer>
+                  
 
             </div>
         );

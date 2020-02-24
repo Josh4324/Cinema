@@ -16,8 +16,7 @@ class Bar extends Component {
     
     render() {
         const { logState, me, user } = this.props;
-        console.log(logState, me)
-        console.log(user)
+       
     
         return (
             <div>

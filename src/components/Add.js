@@ -47,7 +47,10 @@ class Add extends Component {
                     <label htmlFor="FilmTitle">username</label>
                     <input type="text" name="username" placeholder="Username" id="username"/>
                     </div>
-
+                    <div className="form-block">
+                    <label htmlFor="role">Role</label>
+                    <input type="text" name="role" placeholder="Role" id="role" />
+                    </div>
                     <div className="form-block">
                     <div class="file-upload">
                     <input class="file-upload__input" type="file" name="myFile[]" id="myFile" />

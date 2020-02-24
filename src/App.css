@@ -410,16 +410,32 @@ a:hover{
   margin-left:auto;
   margin-right:auto;
   margin-bottom: 100px;
+  width:90%;
+}
+
+.frm {
+  margin-top:50px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom: 100px;
+  width:90%;
 }
 
 input{
   display: block;
-  width:500px;
+  width:100%;
   border: 1px solid rgb(72, 72, 109);
-  background-color:rgb(194, 193, 243);
   height:30px;
-  padding-left:20px;
 }
+
+.input {
+  margin-bottom: 50px;
+  border:none;
+  background: white !important;
+  border-bottom: 1px solid black;
+}
+
+
 
 .timedate{
   padding-right:20px;
@@ -638,9 +654,7 @@ input{
     margin-bottom: 70px;
   }
 
-  .form{
-    padding-left:20px;
-  }
+  
 
   .form-h3{
     font-size:16px;
@@ -680,26 +694,30 @@ input{
 
 .form_block {
   margin-top: 60px;
-  width: 500px;
+  width: 600px;
   margin-left:auto;
   margin-right: auto;
   background: blue;
   padding-top:20px;
   padding-bottom: 20px;
   border-radius: 5px;
+  margin-bottom: 50px;
 }
 
 
 .body {
   background-color: white;
-  width:350px;
+  width:400px;
   margin-left:auto;
   margin-right: auto;
   padding-top:30px;
   padding-bottom: 30px;
   margin-top:20px;
-  border-radius: 5px;
+  border-top-left-radius: 85px;
+  border-bottom-right-radius: 85px;
 }
+
+
 
 .log {
   text-align: center;
@@ -709,8 +727,10 @@ input{
 
 .submit {
   background-color: blue;
-  font-size:20px;
+  font-size:18px;
   color: white;
+  border-radius:10px;
+  padding-bottom:10px;
 }
 
 .forgot {
@@ -877,10 +897,13 @@ input{
   width:50px;
 }
 
+.cimg {
+  width:30px;
+}
+
 
 input[type=file] {
   height:30px;
-  padding-left:20px;
   display:none;
 }
 
@@ -944,5 +967,23 @@ input {
   }
 
 
+}
+
+.commentlist {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.cname {
+  padding-right: 5px;
+  width:25%;
+  color:orange;
+}
+
+.comment {
+ width:90%;
+ margin-right:10px;
+ padding-left: 15px;
 }
 

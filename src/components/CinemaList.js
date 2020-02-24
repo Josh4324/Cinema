@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import {ProductConsumer} from '../Context';
 import Cinema2 from './Cinema2';
 
 
 class CinemaList extends Component {
 
+    state = {
+        mount: false
+    }
+    
+    componentDidMount() {
+        this.setState({mount:true})
+    }
+
     render() {
-        const {history, logState, data, user} = this.props
-        console.log(data)
+        const {history, logState, data, disLikes, addLikes, me, addComment } = this.props
+        let user_meid;
+        if (me) {
+           user_meid = JSON.parse(localStorage.getItem('me')).uid
+        }
         let datalist = []
         if (data !== null) {
         Object.keys(data).map( key => {
@@ -35,20 +45,21 @@ class CinemaList extends Component {
     }
         return (
             <div>
+            {this.state.mount === false ? <div></div> :
         
             <div className="contain py-3">
                 <div className="container1">
                         <div className="row">
                             {
                                 datalist.map((data) => {
-                                    return <Cinema2 key={data.key}  newdata={data} history={history} logState={logState} />
+                                    return <Cinema2 me={me} user_meid={user_meid} addComment={addComment} key={data.key} disLikes={disLikes} addLikes={addLikes}  newdata={data} history={history} logState={logState} />
                                 })
                             }
                         </div>
                 </div>
             </div>
 
-          
+                        }        
 
             </div>
         );

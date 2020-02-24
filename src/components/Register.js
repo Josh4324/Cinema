@@ -41,7 +41,7 @@ export default class Register extends Component {
             <div className="body">
                 <h3 className="log">Register</h3>
                 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="frm">
                     <input placeholder="Enter your email" className="input" type="email" 
                     onChange={this.handleChange("email")}
                     name="email" value={email}
@@ -52,7 +52,7 @@ export default class Register extends Component {
                     name="password"  value={password}
                     />
 
-                    <input type="submit" className="input submit"  value="Register"/>
+                    <input type="submit" className="submit"  value="Register"/>
                     <div className= { this.props.submitting ? 'lds-ring' : null   } ><div></div><div></div><div></div><div></div></div>
                     <div className={ this.props.err ? 'err': 'nothing' }>Error , please try again </div>
                 </form>

@@ -68,6 +68,8 @@ class App extends Component {
       context: this,
       state: "posts"
     });
+
+
   
 
     }  
@@ -222,9 +224,9 @@ class App extends Component {
     let caption = document.getElementById("caption").value;
     let title = document.getElementById("title").value;
     let view = document.getElementById("view").value;
-    let comments = null;
-    let likes = null;
-    let dislikes = null;
+    let comments = [];
+    let likes = 0;
+    let dislikes = 0;
     const posttime = Date.now()
 
   
@@ -300,6 +302,9 @@ class App extends Component {
       postt:posttime,
       pics: that.state.user.pics,
       fullname: that.state.user.fullname,
+      meid:JSON.parse(localStorage.getItem('me')).uid,
+      likeList:["nothing"],
+      dislikeList:["nothing"]
     }
 
     if (post) {
@@ -318,8 +323,132 @@ class App extends Component {
   }
 
 
+  addLikes = (meid,key,user_meid) => {
+    console.log('like')
+    let likes
+    let likeList
+    let post
+    
+    firebase.database().ref(`Posts/${meid}/${key}`).on('value',(snap)=>{ 
+      console.log("data", snap.val());
+      likes = snap.val().likes
+      likeList = snap.val().likeList
+  });
+  
+  if ( likeList.indexOf(user_meid) !== -1){
+    likes = likes - 1
+    let index = likeList.indexOf(user_meid)
+    likeList.splice(index,1)
+    post = {
+      likes: likes,
+      likeList : likeList
+    }
+   
+  }else {
+    likes = likes + 1
+
+    post = {
+      likes: likes,
+      likeList:  [...likeList, user_meid],
+    }
+  }
+
+
+  console.log(post)
+  firebase.database().ref(`Posts/${meid}/${key}`).update(post)
+  }
+
+  disLikes = (meid, key,user_meid) => {
+    console.log('dislike')
+    let dislikes
+    let dislikeList
+    let post
+    
+     firebase.database().ref(`Posts/${meid}/${key}`).on('value',(snap)=>{ 
+      console.log("data", snap.val());
+      dislikes = snap.val().dislikes
+      dislikeList = snap.val().dislikeList
+  }); 
+
+  if ( dislikeList.indexOf(user_meid) !== -1){
+    dislikes = dislikes - 1
+    let index = dislikeList.indexOf(user_meid)
+    dislikeList.splice(index,1)
+    post = {
+      dislikeList: dislikeList,
+      dislikes: dislikes
+    }
+  }else {
+    dislikes = dislikes + 1
+    dislikeList.push(user_meid)
+    post = {
+      dislikeList: dislikeList,
+      dislikes: dislikes
+    }
+  }
+
+  
+    firebase.database().ref(`Posts/${meid}/${key}`).update(post)
+    
+  }
+
+  addComment = (evt,meid,key) => {
+    evt.preventDefault()
+    let commentsList
+    let post
+    const le = 10;
+    let cid = randomId(le, pattern)
+
+    firebase.database().ref(`Posts/${meid}/${key}`).on('value',(snap)=>{ 
+      commentsList = snap.val().commentsList
+    });
+
+    if (evt.keyCode === 13){
+
+     
+    if (commentsList === undefined) {
+      commentsList = []
+      
+      cid = {
+        comment:evt.target.textContent,
+        pics: this.state.user.pics,
+        name: this.state.user.fullname,
+        time: Date.now()
+      }
+
+      commentsList.push(cid)
+      post = {
+        commentsList: commentsList
+      }
+      
+    } else {
+      cid = {
+        comment:evt.target.textContent,
+        pics: this.state.user.pics,
+        name: this.state.user.fullname,
+        time: Date.now()
+      }
+
+      commentsList.push(cid)
+      post = {
+        commentsList: commentsList
+      }
+    }
+
+    evt.target.innerText = ''
+
+    console.log(commentsList)
+    firebase.database().ref(`Posts/${meid}/${key}`).update(post)
+
+    }
+
+    
+  }
+
+
+
   render() {
-    const { me, logState, allposts, user, progress } = this.state;
+    const { me, logState, allposts, user, progress, user_meid } = this.state;
   
 
     return (
@@ -327,7 +456,7 @@ class App extends Component {
        <NavBar onSubmit={this.SignOut()} user={user} logState={logState} me={me}/>
        <Switch>
 
-          <Route exact path="/" render={ ({history}) => ( <CinemaList logState={logState} me={me} history={history} data={allposts}   / > )}  />
+          <Route exact path="/" render={ ({history}) => ( <CinemaList me={me} addComment={this.addComment} user_meid={user_meid} disLikes={this.disLikes} addLikes={this.addLikes} logState={logState} history={history} data={allposts}   / > )}  />
 
           <Route path="/login" render={
             ({ history}) => (

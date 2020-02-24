@@ -41,7 +41,7 @@ export default class Login extends Component {
                 <div className="body">
                     <h3 className="log">Login</h3>
                   
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className="frm">
                         <input placeholder="Enter your email" className="input" type="email"
                         onChange={this.handleChange("email")}
                         name="email" value={email}
@@ -52,7 +52,7 @@ export default class Login extends Component {
                         name="password"  value={password}
                         />
 
-                        <input type="submit" className="input submit" value="Sign In"/>
+                        <input type="submit" className="        submit" value="Sign In"/>
                         <div className= { this.props.submitting ? 'lds-ring' : null   } ><div></div><div></div><div></div><div></div></div>
                         <div className={ this.props.err ? 'err': 'nothing' }>Email and Password do not match, please try again </div>
                     </form>
