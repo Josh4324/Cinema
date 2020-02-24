@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
+import PaystackButton from 'react-paystack';
 
 
 class Cinema2 extends Component {
 
+    state = {
+        key: "pk_live_b3e79fe819b2837687ebce841033308067458339", //PAYSTACK PUBLIC KEY
+        email: "foobar@example.com",  // customer email
+        amount: 10000 //equals NGN100,
+    }
 
+    callback = (response) => {
+        console.log(response); // card charged successfully, get reference here
+    }
+
+    close = () => {
+        console.log("Payment closed");
+    }
+
+    getReference = () => {
+        //you can put any unique reference implementation code here
+        let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
+
+        for( let i=0; i < 15; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
     
 
     render() {
         const {video,title,view, pics, fullname, meid, key, likes, dislikes,commentsList} = this.props.newdata;
-        const {history, newdata, disLikes, addLikes, me, addComment, user_meid } = this.props
-        console.log("new", newdata)
+        const {history, disLikes, addLikes, me, addComment, user_meid } = this.props
         let commentno;
         if (commentsList === undefined){
             commentno = 0
@@ -35,7 +58,18 @@ class Cinema2 extends Component {
                         </div>
                         <div>
                             <video src={video} className="videon" controls type="video/mp4"  />
-                            <button className="button"><span className="white">Buy Ticket</span></button>
+                            <PaystackButton
+                text="Buy Ticket"
+                class="payButton button white"
+                callback={this.callback}
+                close={this.close}
+                disabled={false} 
+                embed={false} 
+                reference={this.getReference()}
+                email={this.state.email}
+                amount={this.state.amount}
+                paystackkey={this.state.key}
+                tag="button" />
                         </div>
                         <div className="socialbuttons mx-auto">
                             <span className="block" onClick={() => { me !== null ? addLikes(meid,key,user_meid) : history.push(`/login`)}      }     ><span className="soc">{likes === 0 ? null : likes}</span><span><i className="fas fa-heart social-icon "></i></span><span className="icon-text">Like</span></span>
@@ -56,7 +90,7 @@ class Cinema2 extends Component {
                         <div>{  
                             commentsList.map((item) => {
                                 if (item !== null){
-                                    return <div className="commentlist">
+                                    return <div className="commentlist" key={item.time}>
                                         <span><img className="cimg" src={item.pics} alt=""/></span>
                                         <div className="comment">
                                             <span className="cname">{item.name}</span>

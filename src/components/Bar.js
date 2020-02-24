@@ -15,7 +15,7 @@ class Bar extends Component {
     };
     
     render() {
-        const { logState, me, user } = this.props;
+        const {me, user } = this.props;
        
     
         return (
@@ -34,7 +34,7 @@ class Bar extends Component {
                         <input type="text" className="Search-input" placeholder="Search for Tickets"></input>
                     </div>
                 
-                    <a href="/" onClick={this.handleSubmit} className={ me !== null ? "log1" : "nothing"}> <span><i class="fas fa-power-off"></i></span> <span className="out">LogOut</span></a>
+                    <a href="/" onClick={this.handleSubmit} className={ me !== null ? "log1" : "nothing"}> <span><i className="fas fa-power-off"></i></span> <span className="out">LogOut</span></a>
                     <span className="elip" onClick={this.toogle.bind(this)}><i className="fas fa-ellipsis-v icon"></i></span>
                 </nav>
             </div>
