@@ -15,6 +15,7 @@ import Add1 from './components/Add1';
 import Register from './components/Register';
 import Login from './components/Login';
 import {base, firebase, fireAuth} from "./config/fire";
+import withAuthProtection from './config/WithAuthProtection';
 const randomId = require('random-id');
 
 const leng = 30;
@@ -23,7 +24,8 @@ const leng = 30;
 // default is aA0 it has a chance for lowercased capitals and numbers
 const pattern = 'aA0'
  
-
+const ProtectedAdd = withAuthProtection("/login")(Add);
+const ProtectedAdd1 = withAuthProtection("/login")(Add1);
 
 
 class App extends Component {
@@ -43,6 +45,7 @@ class App extends Component {
       allposts:JSON.parse(localStorage.getItem('allposts')),
       progress: 0,
       submitted:false,
+      userSettings: {}
     };
   }
 
@@ -69,8 +72,11 @@ class App extends Component {
       state: "posts"
     });
 
+    firebase.database().ref(`Users/${JSON.parse(localStorage.getItem('me')).uid}`).on('value',(snap) => {
+      let userSettings = snap.val()
+      this.setState({userSettings})
+    })
 
-  
 
     }  
   });
@@ -83,6 +89,7 @@ class App extends Component {
       this.setState({allposts})
   });
 
+  
   
 
     
@@ -141,7 +148,10 @@ class App extends Component {
     let fullname = document.getElementById("fullname").value;
     let username = document.getElementById("username").value;
     let pics = document.getElementById("myFile").files[0]
+    let role = document.getElementById('role').value;
     console.log(pics)
+
+    if (pics !== undefined) {
 
     // Create a root reference
     const storageRef = firebase.storage().ref();
@@ -156,6 +166,7 @@ class App extends Component {
 
     // Upload file and metadata to the object 'images/mountains.jpg'
     const uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -195,12 +206,13 @@ class App extends Component {
   // Upload completed successfully, now we can get the download URL
   uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
     console.log('File available at', downloadURL);
-
+  
 
     const user = {
       fullname,
       username,
       pics:downloadURL,
+      role,
       email: JSON.parse(localStorage.getItem('me')).email
     }
 
@@ -212,6 +224,21 @@ class App extends Component {
 
   });
 });
+
+    }
+
+    const user = {
+      fullname,
+      username,
+      role,
+      email: JSON.parse(localStorage.getItem('me')).email
+    }
+
+    if (user) {
+      console.log(that)
+      that.setState({user:user})
+      history.push('/')
+    }
 
     
   }
@@ -448,7 +475,7 @@ class App extends Component {
 
 
   render() {
-    const { me, logState, allposts, user, progress, user_meid } = this.state;
+    const { me, logState, allposts, user, progress, user_meid, userSettings } = this.state;
   
 
     return (
@@ -475,9 +502,15 @@ class App extends Component {
           <Route exact path="/discover" render={ ({history}) => ( <Discover logState={logState} me={me} history={history}  / > )}  />
           <Route exact path="/review" render={ ({history}) => ( <Review logState={logState} me={me} history={history}  / > )}  />
           <Route exact path="/notification" render={ ({history}) => ( <Notification logState={logState} me={me} history={history}  / > )}  />
-          <Route exact path="/add" render={ ({history}) => ( <Add logState={logState} progress={progress} me={me} history={history} addDate={this.AddData}  / > )}  />
-          <Route exact path="/add1" render={ ({history}) => ( <Add1 logState={logState} progress={progress} me={me} history={history} addDate1={this.AddData1}  / > )}  />
           
+          <Route exact path="/add1" render={ 
+            (
+              
+           {history}) => ( 
+           <ProtectedAdd1 logState={logState} progress={progress} me={me} history={history} addDate1={this.AddData1} role={userSettings.role}  / > )}  />
+          
+
+          <Route exact path="/add" render={ ({history}) => ( <ProtectedAdd logState={logState} progress={progress} me={me} history={history} addDate={this.AddData} userSettings={userSettings}  / > )}  />
        </Switch>
      </div>
     );

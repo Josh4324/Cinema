@@ -7,7 +7,7 @@ class Cinema2 extends Component {
     state = {
         key: "pk_live_b3e79fe819b2837687ebce841033308067458339", //PAYSTACK PUBLIC KEY
         email: "foobar@example.com",  // customer email
-        amount: 10000 //equals NGN100,
+        amount: 100 //equals NGN100,
     }
 
     callback = (response) => {

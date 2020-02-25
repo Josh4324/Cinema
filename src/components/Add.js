@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Add extends Component {
+
+   
+
     componentDidMount(){
         Array.prototype.forEach.call(
             document.querySelectorAll(".file-upload__button"),
@@ -31,9 +34,14 @@ class Add extends Component {
               });
             }
           );
+
+          this.setState({fullname:this.props.userSettings.fullname})
     }
     render() {
-        console.log(this.props);
+        const {fullname,username, role} = this.props.userSettings
+        console.log(role)
+        
+        
         return (
             <div>
                 <div className="form-box">
@@ -41,15 +49,19 @@ class Add extends Component {
                 <form className="form">
                     <div className="form-block">
                     <label htmlFor="CinemaName">Full Name</label>
-                    <input type="text" name="fullname" placeholder="Full Name" id="fullname" />
+                    <input type="text" name="fullname" defaultValue={fullname}  placeholder="Full Name" id="fullname" />
                     </div>
                     <div className="form-block">
                     <label htmlFor="FilmTitle">username</label>
-                    <input type="text" name="username" placeholder="Username" id="username"/>
+                    <input type="text" name="username" defaultValue={username} placeholder="Username" id="username"/>
                     </div>
                     <div className="form-block">
-                    <label htmlFor="role">Role</label>
-                    <input type="text" name="role" placeholder="Role" id="role" />
+                    <label for="role">Choose a role:</label>
+
+                    <select id="role" value={role}>
+                      <option  value="User">User</option>
+                      <option value="Seller">Seller</option>
+                    </select>
                     </div>
                     <div className="form-block">
                     <div class="file-upload">
@@ -70,3 +82,6 @@ class Add extends Component {
 }
 
 export default Add;
+
+
+           
