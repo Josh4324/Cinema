@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cinema2 from './Cinema2';
+import Discover1 from './Discover1';
 
 
 class CinemaList extends Component {
@@ -13,7 +13,7 @@ class CinemaList extends Component {
     }
 
     render() {
-        const {history, logState, data, disLikes, addLikes, me, addComment, vc } = this.props
+        const {history, logState, data, disLikes, addLikes, me, addComment } = this.props
         let user_meid;
         if (me) {
            user_meid = JSON.parse(localStorage.getItem('me')).uid
@@ -23,26 +23,26 @@ class CinemaList extends Component {
         Object.keys(data).map( key => {
             let newdata = data[key]
             return Object.keys(newdata).map(key => {
-                console.log(newdata[key])
                 return datalist.push(newdata[key])
             })
         })
 
-        function compare(a, b) {
+         function compare(a, b) {
             
-            const time1 = a.postt
-            const time2 = b.postt
+            const totalnum1 = a.dislikes + a.likes + a.commentsList.length
+            const totalnum2 = b.dislikes + b.likes + b.commentsList.length
+            
           
             let comparison = 0;
-            if (time1 > time2) {
+            if (totalnum1 > totalnum2) {
               comparison = 1;
-            } else if (time1 < time2) {
+            } else if (totalnum1 < totalnum2) {
               comparison = -1;
             }
             return comparison * -1;
           }
           
-          datalist.sort(compare);
+          datalist.sort(compare); 
     }
         return (
             <div>
@@ -53,7 +53,7 @@ class CinemaList extends Component {
                         <div className="row">
                             {
                                 datalist.map((data) => {
-                                    return <Cinema2 me={me} vc={vc} user_meid={user_meid} addComment={addComment} key={data.key} disLikes={disLikes} addLikes={addLikes}  newdata={data} history={history} logState={logState} />
+                                    return <Discover1 me={me} user_meid={user_meid} addComment={addComment} key={data.key} disLikes={disLikes} addLikes={addLikes}  newdata={data} history={history} logState={logState} />
                                 })
                             }
                         </div>

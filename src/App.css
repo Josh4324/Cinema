@@ -625,7 +625,7 @@ input{
   }
 
   .video{
-    height:250px;
+    height:400px;
   }
 
   .nav-item{
@@ -813,6 +813,10 @@ input{
     width: 99%;
   }
 
+  .comment{
+    padding-right:40px;
+  }
+
 }
 
 
@@ -857,6 +861,7 @@ input{
 .videon {
   display:inline-block;
   width: 100%;
+  
 }
 
 .container1 {
@@ -899,6 +904,8 @@ input{
 
 .cimg {
   width:30px;
+  height:30px;
+  border-radius: 50%;
 }
 
 
@@ -985,5 +992,8 @@ input {
  width:90%;
  margin-right:10px;
  padding-left: 15px;
+ background-color:rgb(230, 225, 248);
+ border-radius: 5px;
+ padding: 5px;
 }
 

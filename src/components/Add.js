@@ -35,7 +35,6 @@ class Add extends Component {
             }
           );
 
-          this.setState({fullname:this.props.userSettings.fullname})
     }
     render() {
         const {fullname,username, role} = this.props.userSettings

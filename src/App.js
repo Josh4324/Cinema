@@ -7,7 +7,8 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js/';
 import CinemaList from './components/CinemaList';
-import Discover from './components/Discover';
+import DiscoverList from './components/DiscoverList';
+import Discover1 from './components/Discover1';
 import Review from './components/Review';
 import Notification from './components/Notification';
 import Add from './components/Add';
@@ -45,7 +46,7 @@ class App extends Component {
       allposts:JSON.parse(localStorage.getItem('allposts')),
       progress: 0,
       submitted:false,
-      userSettings: {}
+      userSettings: JSON.parse(localStorage.getItem('settings'))
     };
   }
 
@@ -74,6 +75,7 @@ class App extends Component {
 
     firebase.database().ref(`Users/${JSON.parse(localStorage.getItem('me')).uid}`).on('value',(snap) => {
       let userSettings = snap.val()
+      localStorage.setItem('settings', JSON.stringify(userSettings))
       this.setState({userSettings})
     })
 
@@ -250,7 +252,6 @@ class App extends Component {
     let video = document.getElementById("myFile").files[0];
     let caption = document.getElementById("caption").value;
     let title = document.getElementById("title").value;
-    let view = document.getElementById("view").value;
     let comments = [];
     let likes = 0;
     let dislikes = 0;
@@ -320,7 +321,7 @@ class App extends Component {
       video:downloadURL,
       caption,
       title,
-      view,
+      view:0,
       comments,
       likes,
       dislikes,
@@ -331,7 +332,8 @@ class App extends Component {
       fullname: that.state.user.fullname,
       meid:JSON.parse(localStorage.getItem('me')).uid,
       likeList:["nothing"],
-      dislikeList:["nothing"]
+      dislikeList:["nothing"],
+      role: JSON.parse(localStorage.getItem('settings')).role
     }
 
     if (post) {
@@ -472,10 +474,33 @@ class App extends Component {
     
   }
 
+  videocount = (video,meid,key) => {
+    let view;
+    let post;
+    video.addEventListener('ended', function(e) {
+      console.log('ended')
+      // Your code goes here
+      firebase.database().ref(`Posts/${meid}/${key}`).on('value',(snap)=>{ 
+          console.log("data", snap.val());
+          view = snap.val().view
+          
+      }); 
+
+      view = view + 1
+      post = {
+        view:view
+      }
+
+      firebase.database().ref(`Posts/${meid}/${key}`).update(post)
+
+  });
+  }
+
 
 
   render() {
     const { me, logState, allposts, user, progress, user_meid, userSettings } = this.state;
+    
   
 
     return (
@@ -483,7 +508,8 @@ class App extends Component {
        <NavBar onSubmit={this.SignOut()} user={user} logState={logState} me={me}/>
        <Switch>
 
-          <Route exact path="/" render={ ({history}) => ( <CinemaList me={me} addComment={this.addComment} user_meid={user_meid} disLikes={this.disLikes} addLikes={this.addLikes} logState={logState} history={history} data={allposts}   / > )}  />
+          <Route exact path="/" render={ ({history}) => ( <CinemaList vc={this.videocount} me={me} addComment={this.addComment} user_meid={user_meid} disLikes={this.disLikes} addLikes={this.addLikes} logState={logState} history={history} data={allposts}   / > )}  />
+
 
           <Route path="/login" render={
             ({ history}) => (
@@ -499,7 +525,7 @@ class App extends Component {
           } 
           />
 
-          <Route exact path="/discover" render={ ({history}) => ( <Discover logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/discover" render={ ({history}) => ( <DiscoverList logState={logState} me={me} history={history} data={allposts} / > )}  />
           <Route exact path="/review" render={ ({history}) => ( <Review logState={logState} me={me} history={history}  / > )}  />
           <Route exact path="/notification" render={ ({history}) => ( <Notification logState={logState} me={me} history={history}  / > )}  />
           

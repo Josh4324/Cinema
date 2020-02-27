@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PaystackButton from 'react-paystack';
 
-
-class Cinema2 extends Component {
-
+export class Discover1 extends Component {
     state = {
         key: "pk_live_b3e79fe819b2837687ebce841033308067458339", //PAYSTACK PUBLIC KEY
         email: "foobar@example.com",  // customer email
@@ -29,28 +27,16 @@ class Cinema2 extends Component {
         return text;
     }
 
-    componentDidMount() {
-
-        console.log("p",this.props)
-        console.log(this.refs.video)
-        this.props.vc(this.refs.video,this.props.newdata.meid,this.props.newdata.key)
-
-    }
-    
-
     render() {
         
-        const {video,title, pics, fullname, meid, key, likes, dislikes,commentsList, view} = this.props.newdata;
-        const {history, disLikes, addLikes, me, addComment, user_meid, vc } = this.props
+        const {video,title,view, pics, fullname, meid, key, likes, dislikes,commentsList} = this.props.newdata;
+        const {history, disLikes, addLikes, me, addComment, user_meid } = this.props
         let commentno;
         if (commentsList === undefined){
             commentno = 0
         }else{
             commentno = commentsList.length
         }
-
-        
-       
         
         return (
             <div className="card card1 ">
@@ -62,12 +48,12 @@ class Cinema2 extends Component {
                             <div className="desc">
                                 <p>Cinema name</p>
                                 <p>{title}</p>
-                                
+                                <p>{view}</p>
                             </div>
                             </div>
                         </div>
                         <div>
-                            <video src={video} className="videon" ref="video"  controls type="video/mp4"  />
+                            <video src={video} className="videon"  controls type="video/mp4"  />
                             <PaystackButton
                 text="Buy Ticket"
                 class="payButton button white"
@@ -87,7 +73,7 @@ class Cinema2 extends Component {
                             <span className="block" onClick={ () => (me !== null ? null : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
-                            <p className="view-p">{view === 0 ? null : view}</p>
+                            <p className="view-p">300 views</p>
                         </div>
                         <div ref={this.myRef}>
                         </div>
@@ -124,4 +110,4 @@ class Cinema2 extends Component {
     }
 }
 
-export default Cinema2;
+export default Discover1;
