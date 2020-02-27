@@ -63,6 +63,10 @@ class Add1 extends Component {
                     <input type="text" name="caption" placeholder="Write a caption" id="caption"/>
                     </div>
                     <div className="form-block">
+                    <label htmlFor="cinema">Cinema Name</label>
+                    <input type="text" name="caption" placeholder="Write a caption" id="cinema"/>
+                    </div>
+                    <div className="form-block">
                     <label htmlFor="title">Film Title</label>
                     <input type='text' name="title" placeholder="Film Title" id="title" />
                     </div>

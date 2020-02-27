@@ -40,14 +40,16 @@ class Cinema2 extends Component {
 
     render() {
         
-        const {video,title, pics, fullname, meid, key, likes, dislikes,commentsList, view} = this.props.newdata;
+        const {video,title, pics, fullname, meid, key, likes, dislikes,commentsList, view, cinema, amount,email, viewingt} = this.props.newdata;
         const {history, disLikes, addLikes, me, addComment, user_meid, vc } = this.props
         let commentno;
+        let amount1 = amount * 100
         if (commentsList === undefined){
             commentno = 0
         }else{
             commentno = commentsList.length
         }
+        console.log("vt", viewingt)
 
         
        
@@ -58,11 +60,12 @@ class Cinema2 extends Component {
                     <div>
                         <div className="card-header1">
                             <div>
-                    <div className="person">{ pics !== null ? <img src={pics} className="userimage" alt={fullname} /> : <i className="fas fa-user icon-person"></i>}</div>
+                    <div className="person">{ pics !== null ? <img src={pics} className="userimage1" alt={fullname} /> : <i className="fas fa-user icon-person"></i>}</div>
                             <div className="desc">
-                                <p>Cinema name</p>
+                                <p>{cinema}</p>
                                 <p>{title}</p>
-                                
+                                <p>{`${amount} naira`}</p>
+                                <p>{viewingt}</p>
                             </div>
                             </div>
                         </div>
@@ -76,8 +79,8 @@ class Cinema2 extends Component {
                 disabled={false} 
                 embed={false} 
                 reference={this.getReference()}
-                email={this.state.email}
-                amount={this.state.amount}
+                email={email}
+                amount={amount1}
                 paystackkey={this.state.key}
                 tag="button" />
                         </div>
@@ -87,7 +90,7 @@ class Cinema2 extends Component {
                             <span className="block" onClick={ () => (me !== null ? null : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
-                            <p className="view-p">{view === 0 ? null : view}</p>
+                            <p className="view-p">{view === 0 ? null : view > 1 ? `${view} views` : `${view} view`  } </p>
                         </div>
                         <div ref={this.myRef}>
                         </div>

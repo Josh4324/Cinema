@@ -247,11 +247,17 @@ class App extends Component {
 
   AddData1 = (evt, history) => {
     let that = this;
+    let title,cinema,amount,viewingt
     evt.preventDefault();
-    console.log("collected")
+    
+    title = document.getElementById("title").value;
+    cinema = document.getElementById("cinema").value;
+    amount = document.getElementById("amount").value;
+    viewingt = document.getElementById('view').value;
+  
     let video = document.getElementById("myFile").files[0];
     let caption = document.getElementById("caption").value;
-    let title = document.getElementById("title").value;
+    
     let comments = [];
     let likes = 0;
     let dislikes = 0;
@@ -317,24 +323,31 @@ class App extends Component {
     console.log('File available at', downloadURL);
     console.log('time',posttime)
     const id = randomId(leng, pattern)
-    const post = {
-      video:downloadURL,
-      caption,
-      title,
-      view:0,
-      comments,
-      likes,
-      dislikes,
-      email: JSON.parse(localStorage.getItem('me')).email,
-      key:id,
-      postt:posttime,
-      pics: that.state.user.pics,
-      fullname: that.state.user.fullname,
-      meid:JSON.parse(localStorage.getItem('me')).uid,
-      likeList:["nothing"],
-      dislikeList:["nothing"],
-      role: JSON.parse(localStorage.getItem('settings')).role
-    }
+
+
+      const post = {
+        video:downloadURL,
+        caption,
+        title,
+        view:0,
+        comments,
+        likes,
+        dislikes,
+        cinema,
+        amount,
+        viewingt,
+        email: JSON.parse(localStorage.getItem('me')).email,
+        key:id,
+        postt:posttime,
+        pics: that.state.user.pics,
+        fullname: that.state.user.fullname,
+        meid:JSON.parse(localStorage.getItem('me')).uid,
+        likeList:["nothing"],
+        dislikeList:["nothing"],
+        role: JSON.parse(localStorage.getItem('settings')).role
+      }
+  
+    
 
     if (post) {
       console.log(that)

@@ -194,6 +194,7 @@ a:hover{
 
 .view-p{
   margin-bottom: 0px;
+  padding-left: 20px;
 }
 
 .comments{
@@ -900,6 +901,11 @@ input{
 
 .userimage {
   width:50px;
+}
+
+.userimage1 {
+  width:50px;
+  margin-bottom: 5px;
 }
 
 .cimg {
