@@ -27,7 +27,7 @@ class Bar extends Component {
                         <li className="nav-item "><NavLink to="/Discover" className="nav-link"><span className="text-none">Discover</span><span className="ml-2"><i className="fas fa-compass icon"></i></span></NavLink></li>
                         <li className="nav-item"><NavLink to="/Review"  className="nav-link"><span className="text-none">Review</span><span className="ml-2"><i className="far fa-check-square icon"></i></span></NavLink></li>
                         <li className="nav-item"><NavLink to={ me !== null ? "/Add1" : "/login"} className="nav-link"><span className="text-none">Add</span><span className="ml-2"><i className=" fas fa-plus icon"></i></span></NavLink></li>
-                        <li className="nav-item"><NavLink to="/Notification" className="nav-link"><span className="text-none">Notification</span><span className="ml-2"><i className="fas fa-bell icon"></i></span></NavLink></li>
+            
                     </ul>
                     <div className="Search">
                         <span><i className="fas fa-search icon-search"></i></span>

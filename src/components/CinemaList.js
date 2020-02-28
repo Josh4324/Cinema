@@ -23,8 +23,10 @@ class CinemaList extends Component {
         Object.keys(data).map( key => {
             let newdata = data[key]
             return Object.keys(newdata).map(key => {
-                console.log(newdata[key])
-                return datalist.push(newdata[key])
+                if (newdata[key].role === 'Seller'){
+                    return datalist.push(newdata[key])
+                }
+                
             })
         })
 

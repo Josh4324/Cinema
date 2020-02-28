@@ -1,5 +1,5 @@
 import React from "react";
-import { fireAuth } from "../config/fire";
+
 
 const withAuthProtection = redirectRoute => WrappedComponent => {
   class WithAuthProtection extends React.Component {

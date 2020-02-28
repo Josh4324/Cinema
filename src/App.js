@@ -8,8 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js/';
 import CinemaList from './components/CinemaList';
 import DiscoverList from './components/DiscoverList';
-import Discover1 from './components/Discover1';
-import Review from './components/Review';
+import ReviewList from './components/ReviewList';
 import Notification from './components/Notification';
 import Add from './components/Add';
 import Add1 from './components/Add1';
@@ -25,7 +24,7 @@ const leng = 30;
 // default is aA0 it has a chance for lowercased capitals and numbers
 const pattern = 'aA0'
  
-const ProtectedAdd = withAuthProtection("/login")(Add);
+
 const ProtectedAdd1 = withAuthProtection("/login")(Add1);
 
 
@@ -84,9 +83,7 @@ class App extends Component {
   });
 
   firebase.database().ref('Posts').on('value',(snap)=>{ 
-      console.log("data", snap.val());
       let allposts = snap.val()
-      console.log("check", snap.val())
       localStorage.setItem('allposts', JSON.stringify(allposts));
       this.setState({allposts})
   });
@@ -247,14 +244,16 @@ class App extends Component {
 
   AddData1 = (evt, history) => {
     let that = this;
-    let title,cinema,amount,viewingt
+    let title,cinema,amount,viewingt,post
     evt.preventDefault();
     
-    title = document.getElementById("title").value;
-    cinema = document.getElementById("cinema").value;
-    amount = document.getElementById("amount").value;
-    viewingt = document.getElementById('view').value;
-  
+    if (this.state.userSettings.role === 'Seller') {
+      title = document.getElementById("title").value;
+      cinema = document.getElementById("cinema").value;
+      amount = document.getElementById("amount").value;
+      viewingt = document.getElementById('view').value;
+    }
+
     let video = document.getElementById("myFile").files[0];
     let caption = document.getElementById("caption").value;
     
@@ -324,8 +323,8 @@ class App extends Component {
     console.log('time',posttime)
     const id = randomId(leng, pattern)
 
-
-      const post = {
+    if (that.state.userSettings.role === 'Seller') {
+      post = {
         video:downloadURL,
         caption,
         title,
@@ -344,10 +343,33 @@ class App extends Component {
         meid:JSON.parse(localStorage.getItem('me')).uid,
         likeList:["nothing"],
         dislikeList:["nothing"],
-        role: JSON.parse(localStorage.getItem('settings')).role
+        role: JSON.parse(localStorage.getItem('settings')).role,
       }
   
-    
+
+    }else {
+      post = {
+        video:downloadURL,
+        caption,
+        title:"",
+        view:0,
+        comments,
+        likes,
+        dislikes,
+        cinema:"",
+        amount:"",
+        viewingt:"",
+        email: JSON.parse(localStorage.getItem('me')).email,
+        key:id,
+        postt:posttime,
+        pics: that.state.user.pics,
+        fullname: that.state.user.fullname,
+        meid:JSON.parse(localStorage.getItem('me')).uid,
+        likeList:["nothing"],
+        dislikeList:["nothing"],
+        role: JSON.parse(localStorage.getItem('settings')).role
+      }
+    }
 
     if (post) {
       console.log(that)
@@ -479,7 +501,6 @@ class App extends Component {
 
     evt.target.innerText = ''
 
-    console.log(commentsList)
     firebase.database().ref(`Posts/${meid}/${key}`).update(post)
 
     }
@@ -538,8 +559,8 @@ class App extends Component {
           } 
           />
 
-          <Route exact path="/discover" render={ ({history}) => ( <DiscoverList logState={logState} me={me} history={history} data={allposts} / > )}  />
-          <Route exact path="/review" render={ ({history}) => ( <Review logState={logState} me={me} history={history}  / > )}  />
+          <Route exact path="/discover" render={ ({history}) => ( <DiscoverList logState={logState} me={me} history={history} data={allposts} vc={this.videocount}  addComment={this.addComment} user_meid={user_meid} disLikes={this.disLikes} addLikes={this.addLikes}  / > )}  />
+          <Route exact path="/review" render={ ({history}) => ( <ReviewList vc={this.videocount} me={me} addComment={this.addComment} user_meid={user_meid} disLikes={this.disLikes} addLikes={this.addLikes} logState={logState} history={history} data={allposts}   / > )}  />
           <Route exact path="/notification" render={ ({history}) => ( <Notification logState={logState} me={me} history={history}  / > )}  />
           
           <Route exact path="/add1" render={ 
@@ -549,7 +570,7 @@ class App extends Component {
            <ProtectedAdd1 logState={logState} progress={progress} me={me} history={history} addDate1={this.AddData1} role={userSettings.role}  / > )}  />
           
 
-          <Route exact path="/add" render={ ({history}) => ( <ProtectedAdd logState={logState} progress={progress} me={me} history={history} addDate={this.AddData} userSettings={userSettings}  / > )}  />
+          <Route exact path="/add" render={ ({history}) => ( <Add logState={logState} progress={progress} me={me} history={history} addDate={this.AddData} userSettings={userSettings}  / > )}  />
        </Switch>
      </div>
     );

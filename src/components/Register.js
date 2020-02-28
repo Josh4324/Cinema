@@ -14,13 +14,8 @@ export default class Register extends Component {
         e.preventDefault();
         const { onSubmit } = this.props;
         const { email, password } = this.state;
-        if (onSubmit) {
-          onSubmit(email, password);
-          if (this.props.err){
-            this.setState({email:''})
-            this.setState({password:''})
-        }
-        }
+        
+        onSubmit(email, password);
     };
 
     

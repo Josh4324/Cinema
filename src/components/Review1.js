@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PaystackButton from 'react-paystack';
 
-export class Discover1 extends Component {
+
+class Review1 extends Component {
+
     state = {
         key: "pk_live_b3e79fe819b2837687ebce841033308067458339", //PAYSTACK PUBLIC KEY
         email: "foobar@example.com",  // customer email
@@ -27,10 +29,17 @@ export class Discover1 extends Component {
         return text;
     }
 
+    componentDidMount() {
+
+        this.props.vc(this.refs.video,this.props.newdata.meid,this.props.newdata.key)
+
+    }
+    
+
     render() {
         
-        const {video,title,view, pics, fullname, meid, key, likes, dislikes,commentsList,role,cinema,amount,viewingt} = this.props.newdata;
-        const {history, disLikes, addLikes, me, addComment, user_meid } = this.props
+        const {video,title, pics, fullname, meid, key, likes, dislikes,commentsList, view,role, cinema, amount,email, viewingt} = this.props.newdata;
+        const {history, disLikes, addLikes, me, addComment, user_meid, vc } = this.props
         let commentno;
         let amount1 = amount * 100
         if (commentsList === undefined){
@@ -38,6 +47,10 @@ export class Discover1 extends Component {
         }else{
             commentno = commentsList.length
         }
+       
+
+        
+       
         
         return (
             <div className="card card1 ">
@@ -51,12 +64,11 @@ export class Discover1 extends Component {
                                 <p>{title}</p>
                                 <p>{ amount > 1 ? `${amount} naira` : ""}</p>
                                 <p>{viewingt}</p>
-                                
                             </div>
                             </div>
                         </div>
                         <div>
-                            <video src={video} className="videon"  controls type="video/mp4"  />
+                            <video src={video} className="videon" ref="video"  controls type="video/mp4"  />
                             { role === 'Seller' ? 
                             <PaystackButton
                 text="Buy Ticket"
@@ -66,7 +78,7 @@ export class Discover1 extends Component {
                 disabled={false} 
                 embed={false} 
                 reference={this.getReference()}
-                email={this.state.email}
+                email={email}
                 amount={amount1}
                 paystackkey={this.state.key}
                 tag="button" /> : null }
@@ -77,7 +89,7 @@ export class Discover1 extends Component {
                             <span className="block" onClick={ () => (me !== null ? null : history.push(`/login`) )  }><span className="soc">{commentno === 0 ? null : commentno}</span><span><i className="far fa-comment social-icon"></i></span><span className="icon-text">Comment</span></span>
                         </div>
                         <div className="views">
-                        <p className="view-p">{view === 0 ? null : view > 1 ? `${view} views` : `${view} view`  } </p>
+                            <p className="view-p">{view === 0 ? null : view > 1 ? `${view} views` : `${view} view`  } </p>
                         </div>
                         <div ref={this.myRef}>
                         </div>
@@ -114,4 +126,4 @@ export class Discover1 extends Component {
     }
 }
 
-export default Discover1;
+export default Review1;

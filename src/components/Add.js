@@ -37,8 +37,16 @@ class Add extends Component {
 
     }
     render() {
-        const {fullname,username, role} = this.props.userSettings
-        console.log(role)
+      let fullname,username,role
+        if (this.props.userSettings === null){
+          fullname = ""
+          username = ""
+          role = "User" 
+        }else {
+          fullname = this.props.userSettings.fullname
+          username = this.props.userSettings.username
+          role = this.props.userSettings.role
+        }
         
         
         return (
@@ -57,7 +65,7 @@ class Add extends Component {
                     <div className="form-block">
                     <label for="role">Choose a role:</label>
 
-                    <select id="role" value={role}>
+                    <select id="role" defaultValue={role}>
                       <option  value="User">User</option>
                       <option value="Seller">Seller</option>
                     </select>

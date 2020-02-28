@@ -616,7 +616,8 @@ input{
 
   .nav-item {
     display:inline-block;
-    width: calc(100%/5);
+    width: calc(100%/4);
+    text-align:center;
   }
 
   .icon {
