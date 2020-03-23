@@ -20,6 +20,7 @@ class CinemaList extends Component {
       disLikes,
       addLikes,
       me,
+      vc,
       addComment
     } = this.props;
     let user_meid;
@@ -73,6 +74,7 @@ class CinemaList extends Component {
                       user_meid={user_meid}
                       addComment={addComment}
                       key={data.key}
+                      vc={vc}
                       disLikes={disLikes}
                       addLikes={addLikes}
                       newdata={data}

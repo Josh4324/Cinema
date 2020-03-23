@@ -59,8 +59,7 @@ class Cinema2 extends Component {
       addLikes,
       me,
       addComment,
-      user_meid,
-      vc
+      user_meid
     } = this.props;
     let commentno;
     let amount1 = amount * 100;
