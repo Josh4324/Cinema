@@ -92,7 +92,13 @@ export class Discover1 extends Component {
             </div>
           </div>
           <div>
-            <video src={video} className="videon" controls type="video/mp4" />{" "}
+            <video
+              src={video}
+              className="videon"
+              ref="video"
+              controls
+              type="video/mp4"
+            />{" "}
             {role === "Seller" ? (
               <PaystackButton
                 text="Buy Ticket"
@@ -132,27 +138,22 @@ export class Discover1 extends Component {
                   : history.push(`/login`);
               }}
             >
-              {" "}
               <span className="soc"> {dislikes === 0 ? null : dislikes} </span>
               <span>
-                <i className="fas fa-thumbs-down social-icon "></i>{" "}
+                <i className="fas fa-thumbs-down social-icon "></i>
               </span>
               <span className="icon-text">Dislike</span>{" "}
-            </span>{" "}
+            </span>
             <span
               className="block"
               onClick={() => (me !== null ? null : history.push(`/login`))}
             >
-              {" "}
-              <span className="soc">
-                {" "}
-                {commentno === 0 ? null : commentno}{" "}
-              </span>
+              <span className="soc">{commentno === 0 ? null : commentno}</span>
               <span>
-                <i className="far fa-comment social-icon"></i>{" "}
+                <i className="far fa-comment social-icon"></i>
               </span>
-              <span className="icon-text">Comment</span>{" "}
-            </span>{" "}
+              <span className="icon-text">Comment</span>
+            </span>
           </div>
           <div className="views">
             <p className="view-p">
@@ -171,9 +172,7 @@ export class Discover1 extends Component {
               onKeyUp={evt => addComment(evt, meid, key)}
               contentEditable
               data-text="Write a comment ...."
-            >
-              {" "}
-            </div>{" "}
+            ></div>
           </div>
 
           {commentsList === undefined ? (
