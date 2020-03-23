@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js/";
-import CinemaList from "./components/CinemaList";
-import DiscoverList from "./components/DiscoverList";
-import ReviewList from "./components/ReviewList";
-import Notification from "./components/Notification";
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
 import Add from "./components/Add";
 import Add1 from "./components/Add1";
-import Register from "./components/Register";
+import CinemaList from "./components/CinemaList";
+import DiscoverList from "./components/DiscoverList";
+import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
-import { base, firebase, fireAuth } from "./config/fire";
+import NavBar from "./components/NavBar";
+import Notification from "./components/Notification";
+import Register from "./components/Register";
+import ReviewList from "./components/ReviewList";
+import { base, fireAuth, firebase } from "./config/fire";
 import withAuthProtection from "./config/WithAuthProtection";
 const randomId = require("random-id");
 
@@ -393,7 +394,7 @@ class App extends Component {
             };
           }
 
-          if (post) {
+          if (Object.keys(post).length === 19) {
             console.log(that);
             let posts = {
               ...that.state.posts
@@ -702,6 +703,8 @@ class App extends Component {
               />
             )}
           />
+
+          <Route path="/forgotpassword" component={ForgotPassword} />
         </Switch>
       </div>
     );
