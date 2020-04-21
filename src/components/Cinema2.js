@@ -5,10 +5,10 @@ class Cinema2 extends Component {
   state = {
     key: "pk_live_b3e79fe819b2837687ebce841033308067458339", //PAYSTACK PUBLIC KEY
     email: "foobar@example.com", // customer email
-    amount: 100 //equals NGN100,
+    amount: 100, //equals NGN100,
   };
 
-  callback = response => {
+  callback = (response) => {
     console.log(response); // card charged successfully, get reference here
   };
 
@@ -37,7 +37,7 @@ class Cinema2 extends Component {
   }
 
   render() {
-    const {
+    let {
       video,
       title,
       pics,
@@ -51,7 +51,8 @@ class Cinema2 extends Component {
       cinema,
       amount,
       email,
-      viewingt
+      viewingt,
+      caption,
     } = this.props.newdata;
     const {
       history,
@@ -59,7 +60,7 @@ class Cinema2 extends Component {
       addLikes,
       me,
       addComment,
-      user_meid
+      user_meid,
     } = this.props;
     let commentno;
     let amount1 = amount * 100;
@@ -68,25 +69,28 @@ class Cinema2 extends Component {
     } else {
       commentno = commentsList.length;
     }
+    viewingt = new Date(viewingt);
+    viewingt = viewingt.toString("YYYY-MM-dd");
 
     return (
       <div className="card card1 ">
         <div>
           <div className="card-header1">
             <div>
-              <div className="person">
+              <div className="">
                 {pics !== null ? (
                   <img src={pics} className="userimage1" alt={fullname} />
                 ) : (
-                  <i className="fas fa-user icon-person"></i>
+                  <i className="fas fa-user icon-person" />
                 )}
               </div>
               <div className="desc">
-                <p>{cinema}</p>
-                <p>{title}</p>
-                <p>{`${amount} naira`}</p>
+                <p> Showing at {cinema}</p>
+                <p>Movie Title : {title}</p>
+                <p>Ticket @ {`${amount} naira`}</p>
                 <p>{viewingt}</p>
               </div>
+              <p className="caption">{caption}</p>
             </div>
           </div>
           <div>
@@ -122,23 +126,9 @@ class Cinema2 extends Component {
             >
               <span className="soc">{likes === 0 ? null : likes}</span>
               <span>
-                <i className="fas fa-heart social-icon "></i>
+                <i className="fas fa-heart social-icon " />
               </span>
               <span className="icon-text">Like</span>
-            </span>
-            <span
-              className="block"
-              onClick={() => {
-                me !== null
-                  ? disLikes(meid, key, user_meid)
-                  : history.push(`/login`);
-              }}
-            >
-              <span className="soc">{dislikes === 0 ? null : dislikes}</span>
-              <span>
-                <i className="fas fa-thumbs-down social-icon "></i>
-              </span>
-              <span className="icon-text">Dislike</span>
             </span>
             <span
               className="block"
@@ -146,7 +136,7 @@ class Cinema2 extends Component {
             >
               <span className="soc">{commentno === 0 ? null : commentno}</span>
               <span>
-                <i className="far fa-comment social-icon"></i>
+                <i className="far fa-comment social-icon" />
               </span>
               <span className="icon-text">Comment</span>
             </span>
@@ -156,21 +146,21 @@ class Cinema2 extends Component {
               {view === 0 ? null : view > 1 ? `${view} views` : `${view} view`}{" "}
             </p>
           </div>
-          <div ref={this.myRef}></div>
+          <div ref={this.myRef} />
           <div className="write-comment">
             <div
               className="write"
-              onKeyUp={evt => addComment(evt, meid, key)}
+              onKeyUp={(evt) => addComment(evt, meid, key)}
               contentEditable
               data-text="Write a comment ...."
-            ></div>
+            />
           </div>
 
           {commentsList === undefined ? (
-            <div></div>
+            <div />
           ) : (
             <div>
-              {commentsList.map(item => {
+              {commentsList.map((item) => {
                 if (item !== null) {
                   return (
                     <div className="commentlist" key={item.time}>

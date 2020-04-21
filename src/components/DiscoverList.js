@@ -3,12 +3,12 @@ import Discover1 from "./Discover1";
 
 class CinemaList extends Component {
   state = {
-    mount: false
+    mount: false,
   };
 
   componentDidMount() {
     this.setState({
-      mount: true
+      mount: true,
     });
   }
 
@@ -21,7 +21,7 @@ class CinemaList extends Component {
       addLikes,
       me,
       vc,
-      addComment
+      addComment,
     } = this.props;
     let user_meid;
     if (me) {
@@ -30,9 +30,9 @@ class CinemaList extends Component {
     }
     let datalist = [];
     if (data !== null) {
-      Object.keys(data).map(key => {
+      Object.keys(data).map((key) => {
         let newdata = data[key];
-        return Object.keys(newdata).map(key => {
+        return Object.keys(newdata).map((key) => {
           return datalist.push(newdata[key]);
         });
       });
@@ -67,7 +67,7 @@ class CinemaList extends Component {
           <div className="contain py-3">
             <div className="container1">
               <div className="row">
-                {datalist.map(data => {
+                {datalist.map((data) => {
                   return (
                     <Discover1
                       me={me}

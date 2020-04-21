@@ -41,25 +41,25 @@ class App extends Component {
       allposts: JSON.parse(localStorage.getItem("allposts")),
       progress: 0,
       submitted: false,
-      userSettings: JSON.parse(localStorage.getItem("settings"))
+      userSettings: JSON.parse(localStorage.getItem("settings")),
     };
   }
 
   componentDidMount() {
-    fireAuth.onAuthStateChanged(me => {
+    fireAuth.onAuthStateChanged((me) => {
       if (me) {
         localStorage.setItem("me", JSON.stringify(me));
         const value = this.state.me !== null ? true : false;
         this.setState({
           me,
-          logState: value
+          logState: value,
         });
 
         this.ref = base.syncState(
           `Users/${JSON.parse(localStorage.getItem("me")).uid}`,
           {
             context: this,
-            state: "user"
+            state: "user",
           }
         );
 
@@ -67,18 +67,18 @@ class App extends Component {
           `Posts/${JSON.parse(localStorage.getItem("me")).uid}`,
           {
             context: this,
-            state: "posts"
+            state: "posts",
           }
         );
 
         firebase
           .database()
           .ref(`Users/${JSON.parse(localStorage.getItem("me")).uid}`)
-          .on("value", snap => {
+          .on("value", (snap) => {
             let userSettings = snap.val();
             localStorage.setItem("settings", JSON.stringify(userSettings));
             this.setState({
-              userSettings
+              userSettings,
             });
           });
       }
@@ -87,71 +87,71 @@ class App extends Component {
     firebase
       .database()
       .ref("Posts")
-      .on("value", snap => {
+      .on("value", (snap) => {
         let allposts = snap.val();
         localStorage.setItem("allposts", JSON.stringify(allposts));
         this.setState({
-          allposts
+          allposts,
         });
       });
   }
 
-  handleSignIn = history => (email, password) => {
+  handleSignIn = (history) => (email, password) => {
     this.setState({
-      err: false
+      err: false,
     });
     this.setState({
-      submitting: true
+      submitting: true,
     });
     return fireAuth.signInWithEmailAndPassword(email, password).then(
       () => {
         this.setState({
-          logState: true
+          logState: true,
         });
         this.setState({
-          submitting: false
+          submitting: false,
         });
         return history.push("/");
       },
-      err => {
+      (err) => {
         this.setState({
-          submitting: false
+          submitting: false,
         });
         this.setState({
-          err: true
+          err: true,
         });
         console.log("error", err);
       }
     );
   };
 
-  handleSignUp = history => (email, password) => {
+  handleSignUp = (history) => (email, password) => {
     this.setState({
-      err: false
+      err: false,
     });
     this.setState({
-      submitting: true
+      submitting: true,
     });
     return fireAuth.createUserWithEmailAndPassword(email, password).then(
       () => {
         this.setState({
-          submitting: false
+          submitting: false,
         });
         return history.push("/add");
       },
-      err => {
+      (err) => {
         this.setState({
-          submitting: false
+          submitting: false,
         });
         this.setState({
-          err: true
+          err: true,
         });
         console.log("error", err);
       }
     );
   };
 
-  SignOut = history => () => {
+  SignOut = (history) => () => {
     return fireAuth.signOut().then(() => {
       localStorage.removeItem("me");
       localStorage.removeItem("user");
@@ -178,7 +178,7 @@ class App extends Component {
 
       // Create the file metadata
       const metadata = {
-        contentType: "image/jpeg"
+        contentType: "image/jpeg",
       };
 
       // Upload file and metadata to the object 'images/mountains.jpg'
@@ -189,13 +189,13 @@ class App extends Component {
       // Listen for state changes, errors, and completion of the upload.
       uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-        snapshot => {
+        (snapshot) => {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           var progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
           that.setState({
-            progress
+            progress,
           });
           // eslint-disable-next-line default-case
           switch (snapshot.state) {
@@ -207,7 +207,7 @@ class App extends Component {
               break;
           }
         },
-        error => {
+        (error) => {
           // A full list of error codes is available at
           // https://firebase.google.com/docs/storage/web/handle-errors
           // eslint-disable-next-line default-case
@@ -235,13 +235,13 @@ class App extends Component {
               username,
               pics: downloadURL,
               role,
-              email: JSON.parse(localStorage.getItem("me")).email
+              email: JSON.parse(localStorage.getItem("me")).email,
             };
 
             if (user) {
               console.log(that);
               that.setState({
-                user: user
+                user: user,
               });
               history.push("/");
             }
@@ -254,13 +254,13 @@ class App extends Component {
       fullname,
       username,
       role,
-      email: JSON.parse(localStorage.getItem("me")).email
+      email: JSON.parse(localStorage.getItem("me")).email,
     };
 
     if (user) {
       console.log(that);
       that.setState({
-        user: user
+        user: user,
       });
       history.push("/");
     }
@@ -291,7 +291,7 @@ class App extends Component {
 
     // Create the file metadata
     const metadata = {
-      contentType: "mp4"
+      contentType: "mp4",
     };
 
     const le = 10;
@@ -306,12 +306,12 @@ class App extends Component {
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-      snapshot => {
+      (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
         that.setState({
-          progress
+          progress,
         });
         // eslint-disable-next-line default-case
         switch (snapshot.state) {
@@ -323,7 +323,7 @@ class App extends Component {
             break;
         }
       },
-      error => {
+      (error) => {
         // A full list of error codes is available at
         // https://firebase.google.com/docs/storage/web/handle-errors
         // eslint-disable-next-line default-case
@@ -368,7 +368,7 @@ class App extends Component {
               meid: JSON.parse(localStorage.getItem("me")).uid,
               likeList: ["nothing"],
               dislikeList: ["nothing"],
-              role: JSON.parse(localStorage.getItem("settings")).role
+              role: JSON.parse(localStorage.getItem("settings")).role,
             };
           } else {
             post = {
@@ -390,20 +390,20 @@ class App extends Component {
               meid: JSON.parse(localStorage.getItem("me")).uid,
               likeList: ["nothing"],
               dislikeList: ["nothing"],
-              role: JSON.parse(localStorage.getItem("settings")).role
+              role: JSON.parse(localStorage.getItem("settings")).role,
             };
           }
 
           if (Object.keys(post).length === 19) {
             console.log(that);
             let posts = {
-              ...that.state.posts
+              ...that.state.posts,
             };
             posts[id] = post;
             that.setState({
-              posts
+              posts,
             });
-            history.push("/");
+            history.push("/discover");
           }
         });
       }
@@ -419,7 +419,7 @@ class App extends Component {
     firebase
       .database()
       .ref(`Posts/${meid}/${key}`)
-      .on("value", snap => {
+      .on("value", (snap) => {
         console.log("data", snap.val());
         likes = snap.val().likes;
         likeList = snap.val().likeList;
@@ -431,14 +431,14 @@ class App extends Component {
       likeList.splice(index, 1);
       post = {
         likes: likes,
-        likeList: likeList
+        likeList: likeList,
       };
     } else {
       likes = likes + 1;
 
       post = {
         likes: likes,
-        likeList: [...likeList, user_meid]
+        likeList: [...likeList, user_meid],
       };
     }
 
@@ -458,7 +458,7 @@ class App extends Component {
     firebase
       .database()
       .ref(`Posts/${meid}/${key}`)
-      .on("value", snap => {
+      .on("value", (snap) => {
         console.log("data", snap.val());
         dislikes = snap.val().dislikes;
         dislikeList = snap.val().dislikeList;
@@ -470,14 +470,14 @@ class App extends Component {
       dislikeList.splice(index, 1);
       post = {
         dislikeList: dislikeList,
-        dislikes: dislikes
+        dislikes: dislikes,
       };
     } else {
       dislikes = dislikes + 1;
       dislikeList.push(user_meid);
       post = {
         dislikeList: dislikeList,
-        dislikes: dislikes
+        dislikes: dislikes,
       };
     }
 
@@ -497,7 +497,7 @@ class App extends Component {
     firebase
       .database()
       .ref(`Posts/${meid}/${key}`)
-      .on("value", snap => {
+      .on("value", (snap) => {
         commentsList = snap.val().commentsList;
       });
 
@@ -509,24 +509,24 @@ class App extends Component {
           comment: evt.target.textContent,
           pics: this.state.user.pics,
           name: this.state.user.fullname,
-          time: Date.now()
+          time: Date.now(),
         };
 
         commentsList.push(cid);
         post = {
-          commentsList: commentsList
+          commentsList: commentsList,
         };
       } else {
         cid = {
           comment: evt.target.textContent,
           pics: this.state.user.pics,
           name: this.state.user.fullname,
-          time: Date.now()
+          time: Date.now(),
         };
 
         commentsList.push(cid);
         post = {
-          commentsList: commentsList
+          commentsList: commentsList,
         };
       }
 
@@ -548,14 +548,14 @@ class App extends Component {
       firebase
         .database()
         .ref(`Posts/${meid}/${key}`)
-        .on("value", snap => {
+        .on("value", (snap) => {
           console.log("data", snap.val());
           view = snap.val().view;
         });
 
       view = view + 1;
       post = {
-        view: view
+        view: view,
       };
 
       firebase
@@ -573,12 +573,12 @@ class App extends Component {
       user,
       progress,
       user_meid,
-      userSettings
+      userSettings,
     } = this.state;
 
     if (userSettings === null) {
       userSettings = {
-        role: "User"
+        role: "User",
       };
     }
 

@@ -141,7 +141,11 @@ a:hover {
 
 .desc {
   line-height: 0.3em;
-  margin-left: 80px;
+  margin-top: 20px;
+}
+
+.caption {
+  font-size: 16px;
 }
 
 .icon-person {
@@ -187,7 +191,7 @@ a:hover {
 
 .block {
   display: inline-block;
-  width: calc(100% / 3);
+  width: calc(100% / 2);
   text-align: center;
   cursor: pointer;
   padding-top: 10px;
@@ -929,6 +933,8 @@ input {
 
 .userimage1 {
   width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-bottom: 5px;
 }
 
